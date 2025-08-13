@@ -17,6 +17,7 @@ export async function GET(request: NextRequest) {
     }
     const data = await res.json();
     return NextResponse.json(data);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return NextResponse.json(
       { error: error.message || "Unknown error" },

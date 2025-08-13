@@ -12,7 +12,7 @@ export function Footer() {
                 <span className="text-black font-bold text-lg">R</span>
               </div>
               <div>
-                <h3 className="text-white font-bold text-xl">RoPhim</h3>
+                <h3 className="text-white font-bold text-xl">KAT-VVK</h3>
                 <p className="text-gray-400 text-sm">Phim hay cả rổ</p>
               </div>
             </div>
@@ -104,7 +104,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2024 RoPhim. Tất cả quyền được bảo lưu.
+            © 2024 BLACKKAT. Tất cả quyền được bảo lưu.
             <span className="text-yellow-400 ml-2">Xem phim miễn phí chất lượng cao</span>
           </p>
         </div>

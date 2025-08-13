@@ -3,6 +3,33 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Prevent horizontal overflow */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Ensure all containers respect viewport width */
+.container {
+  max-width: 100%;
+}
+
+/* Fix for carousel and other components */
+[data-slot="sidebar-inset"] {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Ensure no elements extend beyond viewport */
+section, div, main {
+  max-width: 100%;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

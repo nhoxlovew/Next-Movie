@@ -15,4 +15,5 @@ export interface Movie {
   year: number;
   category?: { id: string; name: string; slug: string }[];
   content?: string;
+  imdb_rating?: number;
 }
