@@ -1,120 +1,102 @@
-// import MovieDetail from "@/components/movie-detail/movie-detail";
-// import { MovieDetailResponse } from "@/types/movie-detail.types";
-
-// async function fetchMovieData(
-//   slug: string
-// ): Promise<MovieDetailResponse | null> {
-//   try {
-//     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-//     const res = await fetch(`${baseUrl}/api/phim/${slug}`);
-
-//     if (!res.ok) {
-//       return null;
-//     }
-
-//     const data: MovieDetailResponse = await res.json();
-//     return data;
-//   } catch (error) {
-//     console.error("Error fetching movie data:", error);
-//     return null;
-//   }
-// }
-
-// const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
-//   const { slug } = await params;
-
-//   const movieData = await fetchMovieData(slug);
-
-//   return <MovieDetail slug={slug} initialData={movieData} />;
-// };
-
-// export default Page;
-
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: Promise<{ slug: string }>;
-// }) {
-//   const { slug } = await params;
-
-//   const data = await fetchMovieData(slug);
-
-//   if (!data || !data.movie) {
-//     return {
-//       title: "Phim không tìm thấy",
-//       description: "Phim bạn tìm kiếm không tồn tại hoặc đã bị xóa.",
-//     };
-//   }
-
-//   const { movie } = data;
-//   const movieTitle = movie.name;
-//   const originalTitle = movie.origin_name;
-//   const year = movie.year;
-//   const description =
-//     movie.content || "Xem phim chất lượng cao, vietsub đầy đủ.";
-
-//   const metaDescription =
-//     description.length > 160
-//       ? description.substring(0, 157) + "..."
-//       : description;
-
-//   return {
-//     title: `${movieTitle} (${year}) - Xem Phim Online Vietsub`,
-//     description: metaDescription,
-//     keywords: [
-//       movieTitle,
-//       originalTitle,
-//       `phim ${year}`,
-//       "xem phim online",
-//       "phim vietsub",
-//       "phim thuyết minh",
-//       ...(movie.category?.map((cat) => cat.name) || []),
-//       ...(movie.country?.map((country) => country.name) || []),
-//     ]
-//       .filter(Boolean)
-//       .join(", "),
-//     openGraph: {
-//       title: `${movieTitle} (${year}) - Xem Phim Online`,
-//       description: metaDescription,
-//       type: "video.movie",
-//       locale: "vi_VN",
-//       images: movie.poster_url
-//         ? [
-//             {
-//               url: movie.poster_url,
-//               width: 400,
-//               height: 600,
-//               alt: movieTitle,
-//             },
-//           ]
-//         : [],
-//       releaseDate: year.toString(),
-//     },
-//     twitter: {
-//       card: "summary_large_image",
-//       title: `${movieTitle} (${year})`,
-//       description: metaDescription,
-//       images: movie.poster_url ? [movie.poster_url] : [],
-//     },
-//     alternates: {
-//       canonical: `/phim/${slug}`,
-//     },
-//     other: {
-//       "movie:duration": movie.time || undefined,
-//       "movie:release_date": year.toString(),
-//       "movie:genre":
-//         movie.category?.map((cat) => cat.name).join(", ") || undefined,
-//     },
-//   };
-// }
+"use client"
 
 import { MovieDetails } from '@/components/movie-details'
-import React from 'react'
+import { MovieDetailsSkeleton } from '@/components/movie-details'
+import { useState, useEffect } from 'react'
+import { useSearchParams, useRouter } from 'next/navigation'
+import { Movie } from '@/type/movie-details.types'
 
-const page = () => {
+interface PageProps {
+  params: Promise<{ slug: string }>
+}
+
+const Page = ({ params }: PageProps) => {
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const [movieData, setMovieData] = useState<Movie | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [slug, setSlug] = useState<string>("")
+
+  // Get episode and server from URL params
+  const episodeParam = searchParams.get('tap')
+  const serverParam = searchParams.get('server')
+  const initialEpisode = episodeParam ? parseInt(episodeParam) : 1
+  const initialServer = serverParam || 'vietsub'
+
+  useEffect(() => {
+    const getParams = async () => {
+      const resolvedParams = await params
+      setSlug(resolvedParams.slug)
+    }
+    getParams()
+  }, [params])
+
+  useEffect(() => {
+    if (!slug) return
+
+    const fetchMovieData = async () => {
+      try {
+        setIsLoading(true)
+        setError(null)
+
+        const response = await fetch(`/api/phim/${slug}`)
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch movie data')
+        }
+
+        const data = await response.json()
+
+        if (data.status && data.movie) {
+          setMovieData(data.movie)
+        } else {
+          throw new Error('Movie not found')
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred')
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchMovieData()
+  }, [slug])
+
+  if (isLoading) {
+    return <MovieDetailsSkeleton />
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Error</h1>
+          <p className="text-gray-400">{error}</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!movieData) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Movie Not Found</h1>
+          <p className="text-gray-400">The movie you&apos;re looking for doesn&apos;t exist.</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <MovieDetails movieId="1" isLoading={true} />
+    <MovieDetails
+      movieData={movieData}
+      initialEpisode={initialEpisode}
+      initialServer={initialServer}
+      slug={slug}
+    />
   )
 }
 
-export default page
+export default Page

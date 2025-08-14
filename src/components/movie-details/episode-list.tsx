@@ -8,16 +8,27 @@ import { EpisodeListSkeleton } from "./skeletons/episode-list-skeleton"
 interface Episode {
   number: number
   duration: string
-  views: number
+  
 }
 
 interface EpisodeListProps {
   episodes: Episode[]
   isLoading?: boolean
+  selectedEpisode?: number
+  setSelectedEpisode?: (episode: number) => void
 }
 
-export function EpisodeList({ episodes, isLoading = false }: EpisodeListProps) {
-  const [selectedEpisode, setSelectedEpisode] = useState(1)
+export function EpisodeList({
+  episodes,
+  isLoading = false,
+  selectedEpisode: externalSelectedEpisode,
+  setSelectedEpisode: externalSetSelectedEpisode
+}: EpisodeListProps) {
+  const [internalSelectedEpisode, setInternalSelectedEpisode] = useState(1)
+
+  // Use external state if provided, otherwise use internal state
+  const selectedEpisode = externalSelectedEpisode ?? internalSelectedEpisode
+  const setSelectedEpisode = externalSetSelectedEpisode ?? setInternalSelectedEpisode
 
   if (isLoading) {
     return <EpisodeListSkeleton />
@@ -46,7 +57,7 @@ export function EpisodeList({ episodes, isLoading = false }: EpisodeListProps) {
             <div className="text-center">
               <div className="text-lg font-bold mb-1">Tập {episode.number}</div>
               <div className="text-sm text-gray-400">{episode.duration}</div>
-              <div className="text-xs text-gray-500 mt-1">{episode.views.toLocaleString()} lượt xem</div>
+
             </div>
           </Card>
         ))}

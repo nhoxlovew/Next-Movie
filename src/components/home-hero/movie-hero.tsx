@@ -43,7 +43,7 @@ export function MovieHero() {
         console.log(data);
         if (data && data.items) {  
           // Only take first 5 movies
-          setHeroMovies(data.items.slice(0, 5));
+          setHeroMovies(data.items.slice(0, 10));
         }
       } catch (error) {
         console.error("Error fetching movies:", error);
@@ -69,7 +69,7 @@ export function MovieHero() {
         }}
       >
         <CarouselContent className="w-full h-full -ml-0 ">
-          {heroMovies.map((movie, index) => (
+          {heroMovies.map((movie) => (
             <CarouselItem key={movie._id} className="w-full h-full pl-0 ">
               <div className="relative w-full h-full min-h-screen overflow-hidden">
                 <div className="absolute inset-0 w-full h-full"> 
@@ -90,18 +90,18 @@ export function MovieHero() {
                       {/* Left Content */}
                       <div className="w-full max-w-4xl overflow-hidden">
                         <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-6 sm:mb-8">
-                          <div className="relative group flex-shrink-0">
+                          {/* <div className="relative group flex-shrink-0">
                             <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full blur-lg opacity-0  duration-300"></div>
                             <Image
                               src={movie.thumb_url}
                               alt={movie.name}
-                              width={96}
-                              height={96}
+                              width={200}
+                              height={200}
                               className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full border-3 border-yellow-400/50 shadow-2xl object-cover"
                             />
-                          </div>
+                          </div> */}
                           <div className="flex-1 min-w-0">
-                            <h1 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold font-serif mb-2 tracking-tight leading-tight">
+                            <h1 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-extrabold  font-serif mb-2  leading-tight">
                               {movie.name}
                             </h1>
                             <p className="text-gray-300 text-lg sm:text-xl lg:text-2xl font-light">{movie.origin_name}</p>
@@ -118,7 +118,7 @@ export function MovieHero() {
                             {movie.quality}
                           </span>
                           <span className="bg-slate-800/80 backdrop-blur-xl text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold border border-slate-600/30 shadow-lg">
-                            T16
+                            {movie.type}
                           </span>
                           <span className="bg-slate-800/80 backdrop-blur-xl text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold border border-slate-600/30 shadow-lg">
                             {movie.year}
@@ -187,19 +187,6 @@ export function MovieHero() {
         <CarouselPrevious className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 backdrop-blur-sm text-white border border-white/10 hover:border-yellow-400/50 w-10 h-10 sm:w-14 sm:h-14" />
         <CarouselNext className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 backdrop-blur-sm text-white border border-white/10 hover:border-yellow-400/50 w-10 h-10 sm:w-14 sm:h-14" />
       </Carousel>
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex space-x-3">
-        {heroMovies.map((_, index) => (
-          <button
-            key={index}
-            className={`w-4 h-4 rounded-full transition-all duration-300 border border-white/20 ${
-              current === index
-                ? "bg-gradient-to-r from-yellow-400 to-orange-500 border-yellow-400"
-                : "bg-white/30 hover:bg-white/50"
-            }`}
-            onClick={() => api?.scrollTo(index)}
-          />
-        ))}
-      </div>
     </section>
   )
 }

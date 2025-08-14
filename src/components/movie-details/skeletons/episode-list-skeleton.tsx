@@ -17,7 +17,6 @@ export function EpisodeListSkeleton() {
             <div className="text-center space-y-2">
               <Skeleton className="h-5 w-12 mx-auto" />
               <Skeleton className="h-4 w-16 mx-auto" />
-              <Skeleton className="h-3 w-20 mx-auto" />
             </div>
           </Card>
         ))}

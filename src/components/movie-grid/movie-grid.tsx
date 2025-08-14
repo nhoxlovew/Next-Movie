@@ -39,6 +39,7 @@ export function MovieGrid() {
 
   return (
     <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 via-slate-900 to-gray-900 overflow-hidden">
+      
       <div className="max-w-7xl mx-auto w-full">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent mb-4 sm:mb-6">
@@ -50,21 +51,21 @@ export function MovieGrid() {
           <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-orange-500 mx-auto mt-4 sm:mt-6 rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 hover:cursor-pointer">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
           {moviesCard.map((movie) => (
-            <div
+            <Link
               key={movie._id}
-              className="group relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-2xl overflow-hidden hover:from-slate-700/50 hover:to-slate-800/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/10 border border-slate-700/30 hover:border-yellow-400/30"
+              href={`/phim/${movie.slug}`}
+              className="group relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-2xl overflow-hidden hover:from-slate-700/50 hover:to-slate-800/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/10 border border-slate-700/30 hover:border-yellow-400/30 block cursor-pointer"
+              onClick={() => console.log(`Navigating to: /phim/${movie.slug}`)}
             >
               <div className="relative aspect-[2/3] overflow-hidden">
-                <Link href={`/details/${movie.slug}`} >
-                  <Image
-                    src={movie.poster_url}
-                    fill
-                    alt={movie.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                </Link>
+                <Image
+                  src={movie.poster_url}
+                  fill
+                  alt={movie.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
 
@@ -77,7 +78,14 @@ export function MovieGrid() {
                   
                 </div>
 
-                <button className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-red-500/80">
+                <button
+                  className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-red-500/80 z-10"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    // Add to favorites logic here
+                  }}
+                >
                   <Heart className="w-4 h-4" />
                 </button>
               </div>
@@ -123,10 +131,11 @@ export function MovieGrid() {
                   </div>
                 )}
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
+      
     </section>
   )
 }
