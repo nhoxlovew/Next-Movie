@@ -129,3 +129,35 @@ export const movies = [
     trending: false,
   },
 ]
+
+
+
+  export const movie = {
+    title: "Thử Thách Thần Tượng",
+    originalTitle: "Challenge Idol",
+    year: "2024",
+    duration: "45 phút/tập",
+    rating: 8.5,
+    views: "1.2M",
+    genres: ["Thực Tế", "Giải Trí", "Âm Nhạc", "Thi Đấu"],
+    description:
+      "Thử Thách Thần Tượng là chương trình thực tế âm nhạc đầy kịch tính, nơi các thí sinh tài năng từ khắp nơi quy tụ để tranh tài và chứng minh khả năng của mình. Với những thử thách đa dạng từ hát, nhảy đến diễn xuất, chương trình hứa hẹn mang đến những màn trình diễn spectacular và cảm xúc.",
+    poster: "/placeholder.svg?height=600&width=400",
+    backdrop: "/placeholder.svg?height=800&width=1400",
+    episodes: Array.from({ length: 24 }, (_, i) => ({
+      number: i + 1,
+      title: `Tập ${i + 1}`,
+      duration: "45:30",
+      views: Math.floor(Math.random() * 500000) + 100000,
+    })),
+    cast: [
+      { name: "Lee Min Ho", role: "MC chính", avatar: "/placeholder.svg?height=80&width=80" },
+      { name: "Park Shin Hye", role: "Giám khảo", avatar: "/placeholder.svg?height=80&width=80" },
+      { name: "Kim Soo Hyun", role: "Mentor", avatar: "/placeholder.svg?height=80&width=80" },
+      { name: "Song Hye Kyo", role: "Giám khảo", avatar: "/placeholder.svg?height=80&width=80" },
+      { name: "Jung Hae In", role: "Mentor", avatar: "/placeholder.svg?height=80&width=80" },
+      { name: "IU", role: "Khách mời", avatar: "/placeholder.svg?height=80&width=80" },
+      { name: "BTS RM", role: "Khách mời", avatar: "/placeholder.svg?height=80&width=80" },
+      { name: "BLACKPINK Lisa", role: "Khách mời", avatar: "/placeholder.svg?height=80&width=80" },
+    ],
+  }

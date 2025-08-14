@@ -5,7 +5,7 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const page = searchParams.get("page") || "1";
 
-  const apiUrl = `https://phimapi.com/danh-sach/phim-moi-cap-nhat-v3?page=${encodeURIComponent(page)}`;
+  const apiUrl = `https://phimapi.com/danh-sach/phim-moi-cap-nhat-v3?page=${(page)}`;
 
   try {
     const res = await fetch(apiUrl, { cache: "no-store" });
@@ -17,10 +17,10 @@ export async function GET(request: NextRequest) {
     }
     const data = await res.json();
     return NextResponse.json(data);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
+
+  } catch (error) {
     return NextResponse.json(
-      { error: error.message || "Unknown error" },
+      console.error('Error fetching data',error),
       { status: 500 }
     );
   }

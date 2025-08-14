@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Play, Heart, Info, Star,Eye} from "lucide-react"
+import { Play, Heart, Info, Star} from "lucide-react"
 
 
 import {
@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
 import Image from "next/image"
-import { Movie } from "@/type/type"
+import { Movie } from "@/type/movie-details.types"
 import Link from "next/link"
 
 
@@ -112,7 +112,7 @@ export function MovieHero() {
                           <div className="flex items-center space-x-1 sm:space-x-2 bg-gradient-to-r from-yellow-500 via-yellow-400 to-orange-500 text-black px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold shadow-xl">
                             <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current" />
                             <span className="text-xs font-medium hidden sm:inline">IMDb</span>
-                            <span className="text-sm sm:text-lg">{movie.imdb_rating||""}</span>
+                            <span className="text-sm sm:text-lg">{movie.tmdb?.vote_average?.toFixed(1)||""}</span>
                           </div>
                           <span className="bg-slate-800/80 backdrop-blur-xl text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold border border-slate-600/30 shadow-lg">
                             {movie.quality}
@@ -164,7 +164,7 @@ export function MovieHero() {
                               <span className="sm:hidden">Thích</span>
                             </Button>
                             
-                            <Link href={`/details`} >
+                            <Link href={`/phim/${movie.slug}`} >
                             <Button
                               variant="outline"
                               size="lg"

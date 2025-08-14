@@ -1,32 +1,41 @@
 "use client"
 
-import { Star, Play, Clock, Eye, Heart } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Star, Clock, Eye, Heart } from "lucide-react"
+import Link from "next/link";
 import Image from "next/image"
 import { useEffect, useState } from "react";
-import { Movie } from "@/type/type";
+import { MovieGridSkeleton } from "./skeletons/movie-grid-skeleton";
+import { Movie } from "@/type/movie-details.types";
 
 
 
 export function MovieGrid() {
   const [moviesCard, setMoviesCard] = useState<Movie[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
       useEffect(() => {
       async function fetchMovies() {
         try {
+          setIsLoading(true);
           const res = await fetch("api/phim-moi-cap-nhat");
           const data = await res.json();
           console.log(data);
           if (data && data.items) {
-            // Only take first 3 movies
+            // Only take first 24 movies
             setMoviesCard(data.items.slice(0,24));
           }
         } catch (error) {
           console.error("Error fetching movies:", error);
+        } finally {
+          setIsLoading(false);
         }
       }
       fetchMovies();
     }, []);
+
+  if (isLoading) {
+    return <MovieGridSkeleton />;
+  }
 
   return (
     <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 via-slate-900 to-gray-900 overflow-hidden">
@@ -41,37 +50,23 @@ export function MovieGrid() {
           <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-orange-500 mx-auto mt-4 sm:mt-6 rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 hover:cursor-pointer">
           {moviesCard.map((movie) => (
             <div
               key={movie._id}
               className="group relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-2xl overflow-hidden hover:from-slate-700/50 hover:to-slate-800/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/10 border border-slate-700/30 hover:border-yellow-400/30"
             >
               <div className="relative aspect-[2/3] overflow-hidden">
-                <Image
-                  src={movie.poster_url}
-                  fill
-                  alt={movie.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
+                <Link href={`/details/${movie.slug}`} >
+                  <Image
+                    src={movie.poster_url}
+                    fill
+                    alt={movie.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                </Link>
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
-
-                <div className="absolute top-4 left-4 flex flex-col space-y-2">
-                  <span
-                    className={`${movie.quality === "4K" ? "bg-gradient-to-r from-red-500 to-red-600" : "bg-gradient-to-r from-blue-500 to-blue-600"} text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg backdrop-blur-sm`}
-                  >
-                    {movie.quality}
-                  </span>
-                  <span className="bg-gradient-to-r from-green-500 to-green-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg backdrop-blur-sm">
-                    {movie.lang}
-                  </span>
-                  {movie.sub_docquyen && (
-                    <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg backdrop-blur-sm">
-                      HOT
-                    </span>
-                  )}
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
 
                 <div className="absolute top-4 right-4 flex items-center space-x-1 bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-lg">
                   <Eye className="w-3 h-3" />
@@ -79,14 +74,7 @@ export function MovieGrid() {
                 </div>
 
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                  <div className="transform scale-75 group-hover:scale-100 transition-transform duration-300">
-                    <Button
-                      size="lg"
-                      className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 hover:from-yellow-500 hover:via-orange-600 hover:to-red-600 text-black font-bold rounded-full w-16 h-16 shadow-2xl"
-                    >
-                      <Play className="w-8 h-8 fill-current" />
-                    </Button>
-                  </div>
+                  
                 </div>
 
                 <button className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-red-500/80">
@@ -109,7 +97,9 @@ export function MovieGrid() {
                   </div>
                   <div className="flex items-center space-x-1 bg-gradient-to-r from-yellow-400/20 to-orange-500/20 px-2 sm:px-3 py-1 rounded-full self-start sm:self-auto">
                     <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-current" />
-                    <span className="text-yellow-400 font-bold text-xs sm:text-sm">{movie.imdb_rating||""}</span>
+                    <span className="text-yellow-400 font-bold text-xs sm:text-sm">
+                      {movie.tmdb?.vote_average ? movie.tmdb.vote_average.toFixed(1) : "0"}
+                    </span>
                   </div>
                 </div>
 
@@ -117,12 +107,12 @@ export function MovieGrid() {
 
                 {movie.category && movie.category.length > 0 && (
                   <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
-                    {movie.category.slice(0, 2).map((genre) => (
+                    {movie.category.slice(0, 2).map((category: { id: string; name: string; slug: string }) => (
                       <span
-                        key={genre.id}
+                        key={category.id}  
                         className="bg-slate-900/70 backdrop-blur-sm text-gray-300 px-2 sm:px-3 py-1 rounded-full text-xs font-medium border border-slate-700/40 hover:bg-slate-800/70 hover:border-yellow-400/30 hover:text-yellow-300 transition-all duration-300 cursor-pointer"
                       >
-                        {genre.name}
+                        {category.name}
                       </span>
                     ))}
                     {movie.category.length > 2 && (
@@ -132,24 +122,9 @@ export function MovieGrid() {
                     )}
                   </div>
                 )}
-
-                <Button className="w-full bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 hover:from-yellow-500 hover:via-orange-600 hover:to-red-600 text-black font-bold py-2.5 sm:py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-sm sm:text-base">
-                  <Play className="w-3 h-3 sm:w-4 sm:h-4 mr-2 fill-current" />
-                  Xem Phim
-                </Button>
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="text-center mt-12 sm:mt-16">
-          <Button
-            variant="outline"
-            size="lg"
-            className="border-2 border-yellow-400/50 text-yellow-400 hover:bg-gradient-to-r hover:from-yellow-400 hover:to-orange-500 hover:text-black hover:border-transparent px-8 sm:px-12 py-3 sm:py-4 bg-transparent backdrop-blur-sm rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 text-sm sm:text-base"
-          >
-            Xem Thêm Phim
-          </Button>
         </div>
       </div>
     </section>
