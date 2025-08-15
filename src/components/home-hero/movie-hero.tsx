@@ -87,19 +87,9 @@ export function MovieHero() {
                 <div className="relative z-10 w-full h-full min-h-screen flex items-center overflow-hidden">
                   <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full max-w-full">
                     <div className="flex items-center justify-between w-full max-w-full overflow-hidden">
-                      {/* Left Content */}
+                     
                       <div className="w-full max-w-4xl overflow-hidden">
                         <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-6 sm:mb-8">
-                          {/* <div className="relative group flex-shrink-0">
-                            <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full blur-lg opacity-0  duration-300"></div>
-                            <Image
-                              src={movie.thumb_url}
-                              alt={movie.name}
-                              width={200}
-                              height={200}
-                              className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full border-3 border-yellow-400/50 shadow-2xl object-cover"
-                            />
-                          </div> */}
                           <div className="flex-1 min-w-0">
                             <h1 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-extrabold  font-serif mb-2  leading-tight">
                               {movie.name}
@@ -146,6 +136,8 @@ export function MovieHero() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5">
+                          <Link href={`/phim/${movie.slug}`} >
+                          
                           <Button
                             size="lg"
                             className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 hover:from-yellow-500 hover:via-orange-600 hover:to-red-600 text-black font-bold px-6 sm:px-10 py-3 sm:py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-yellow-500/25 w-full sm:w-auto"
@@ -153,6 +145,7 @@ export function MovieHero() {
                             <Play className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 fill-current" />
                             Xem Phim
                           </Button>
+                          </Link> 
                           <div className="flex gap-3 sm:gap-5">
                             <Button
                               variant="outline"

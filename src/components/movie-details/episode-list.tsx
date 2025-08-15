@@ -33,6 +33,10 @@ export function EpisodeList({
   if (isLoading) {
     return <EpisodeListSkeleton />
   }
+  if(episodes.length < 2) {
+     
+  }
+
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -47,11 +51,12 @@ export function EpisodeList({
         {episodes.map((episode) => (
           <Card
             key={episode.number}
-            className={`p-4 cursor-pointer transition-all duration-300 border ${
+            className={`p-2 border-1 border-solid rounded-4xl  cursor-pointer transition-all duration-300  ${
               selectedEpisode === episode.number
                 ? "bg-gradient-to-br from-yellow-500/20 to-orange-500/20 border-yellow-500/50"
                 : "bg-gray-900/50 border-gray-700 hover:bg-gray-800/50 hover:border-gray-600"
             }`}
+            
             onClick={() => setSelectedEpisode(episode.number)}
           >
             <div className="text-center">

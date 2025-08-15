@@ -77,12 +77,10 @@ export function MovieDetails({
     ...movieData.actor.slice(0, 8).map((actor) => ({
       name: actor,
       role: "Diễn viên",
-      avatar: `/placeholder.svg?height=80&width=80`
     })),
     ...movieData.director.slice(0, 2).map((director) => ({
       name: director,
       role: "Đạo diễn",
-      avatar: `/placeholder.svg?height=80&width=80`
     }))
   ]
 

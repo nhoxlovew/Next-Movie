@@ -161,3 +161,4 @@ export const movies = [
       { name: "BLACKPINK Lisa", role: "Khách mời", avatar: "/placeholder.svg?height=80&width=80" },
     ],
   }
+
