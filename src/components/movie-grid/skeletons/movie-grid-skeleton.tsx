@@ -36,11 +36,6 @@ export function MovieGridSkeleton() {
                 <div className="absolute top-2 right-2">
                   <Skeleton className="h-6 w-12" />
                 </div>
-
-                {/* Play Button */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Skeleton className="w-12 h-12 rounded-full" />
-                </div>
               </div>
 
               {/* Movie Info */}

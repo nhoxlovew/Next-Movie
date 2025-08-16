@@ -1,6 +1,8 @@
 "use client"
 
-import { ChevronRight, type LucideIcon } from "lucide-react"
+import { useEffect, useState } from "react"
+import { ChevronRight, type LucideIcon, SmilePlus } from "lucide-react"
+import type { Category } from "@/type/movie-list.types"
 
 import {
   Collapsible,
@@ -18,25 +20,25 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
 
-export function NavMain({
-  items,
-}: {
-  items: {
-    title: string
-    url: string
-    icon?: LucideIcon
-    isActive?: boolean
-    items?: {
-      title: string
-      url: string
-    }[]
-  }[]
-}) {
+export function NavMain(
+ ) {
+  const [genres, setGenres] = useState<Category[]>([])
+
+  useEffect(() => {
+    let ignore = false
+    fetch("/api/the-loai")
+      .then((r) => r.json() as Promise<Category[]>)
+      .then((data) => { if (!ignore) setGenres(data) })
+      .catch(() => { if (!ignore) setGenres([]) })
+    return () => { ignore = true }
+  }, [])
+
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel>Danh mục</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) => (
+        {/* Existing static groups */}
+        {/* {items.map((item) => (
           <Collapsible
             key={item.title}
             asChild
@@ -51,22 +53,36 @@ export function NavMain({
                   <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                 </SidebarMenuButton>
               </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  {item.items?.map((subItem) => (
-                    <SidebarMenuSubItem key={subItem.title}>
-                      <SidebarMenuSubButton asChild>
-                        <a href={subItem.url}>
-                          <span>{subItem.title}</span>
-                        </a>
-                      </SidebarMenuSubButton>
-                    </SidebarMenuSubItem>
-                  ))}
-                </SidebarMenuSub>
-              </CollapsibleContent>
+             
             </SidebarMenuItem>
           </Collapsible>
-        ))}
+        ))} */}
+
+        {/* Dynamic genre group */}
+        <Collapsible asChild className="group/collapsible">
+          <SidebarMenuItem>
+            <CollapsibleTrigger asChild>
+              <SidebarMenuButton>
+                <SmilePlus className="mr-2" /> 
+                <span>Thể loại</span>
+                <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+              </SidebarMenuButton>
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <SidebarMenuSub>
+                {genres.map((g) => (
+                  <SidebarMenuSubItem key={g.slug}>
+                    <SidebarMenuSubButton asChild>
+                      <a href={`/the-loai/${g.slug}`}>
+                        <span>{g.name}</span>
+                      </a>
+                    </SidebarMenuSubButton>
+                  </SidebarMenuSubItem>
+                ))}
+              </SidebarMenuSub>
+            </CollapsibleContent>
+          </SidebarMenuItem>
+        </Collapsible>
       </SidebarMenu>
     </SidebarGroup>
   )

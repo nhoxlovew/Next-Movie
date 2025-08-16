@@ -1,6 +1,6 @@
 "use client"
 
-import { Star, Clock, Eye, Heart } from "lucide-react"
+import { Star, Clock, Heart } from "lucide-react"
 import Link from "next/link";
 import Image from "next/image"
 import { useEffect, useState } from "react";
@@ -38,17 +38,17 @@ export function MovieGrid() {
   }
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 via-slate-900 to-gray-900 overflow-hidden">
+    <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8  overflow-hidden">
       
       <div className="max-w-7xl mx-auto w-full">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold bg-gradient-to-r from-green-400 via-green-500 to-green-900 bg-clip-text text-transparent mb-4 sm:mb-6">
             Phim Mới Cập Nhật
           </h2>
           <p className="text-gray-400 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed px-4">
             Khám phá những bộ phim mới nhất với chất lượng HD và 4K, được cập nhật liên tục mỗi ngày
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-orange-500 mx-auto mt-4 sm:mt-6 rounded-full"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-green-400 via-green-500 to-green-900 mx-auto mt-4 sm:mt-6 rounded-full"></div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
@@ -69,14 +69,12 @@ export function MovieGrid() {
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
 
-                <div className="absolute top-4 right-4 flex items-center space-x-1 bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-lg">
-                  <Eye className="w-3 h-3" />
-                  <span>{Math.floor(Math.random() * 10000) + 1000}</span>
-                </div>
-
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                  
-                </div>
+                <div className="absolute top-4 right-4 flex items-center space-x-1 bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-lg">                  
+                  <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-current" />
+                    <span className="text-yellow-400 font-bold text-xs sm:text-sm">
+                      {movie.tmdb?.vote_average ? movie.tmdb.vote_average.toFixed(1) : "0"}
+                    </span>
+                </div>               
 
                 <button
                   className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-red-500/80 z-10"
@@ -104,10 +102,7 @@ export function MovieGrid() {
                     </div>
                   </div>
                   <div className="flex items-center space-x-1 bg-gradient-to-r from-yellow-400/20 to-orange-500/20 px-2 sm:px-3 py-1 rounded-full self-start sm:self-auto">
-                    <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-current" />
-                    <span className="text-yellow-400 font-bold text-xs sm:text-sm">
-                      {movie.tmdb?.vote_average ? movie.tmdb.vote_average.toFixed(1) : "0"}
-                    </span>
+                   
                   </div>
                 </div>
 
@@ -135,7 +130,6 @@ export function MovieGrid() {
           ))}
         </div>
       </div>
-      
     </section>
   )
 }

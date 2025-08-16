@@ -30,8 +30,6 @@ export function MoviePlayer({
   selectedEpisode,
   setSelectedEpisode,
   episodes,
-  movieBackdrop,
-  movieTitle,
   movieSlug,
   selectedServer: externalSelectedServer,
   setSelectedServer: externalSetSelectedServer,

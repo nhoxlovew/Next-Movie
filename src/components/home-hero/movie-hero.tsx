@@ -99,7 +99,7 @@ export function MovieHero() {
                         </div>
 
                         <div className="flex items-center flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
-                          <div className="flex items-center space-x-1 sm:space-x-2 bg-gradient-to-r from-yellow-500 via-yellow-400 to-orange-500 text-black px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold shadow-xl">
+                          <div className="flex items-center space-x-1 sm:space-x-2 bg-gradient-to-r from-green-400 via-green-500 to-green-500/50 text-black px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold shadow-xl">
                             <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current" />
                             <span className="text-xs font-medium hidden sm:inline">IMDb</span>
                             <span className="text-sm sm:text-lg">{movie.tmdb?.vote_average?.toFixed(1)||""}</span>
@@ -123,7 +123,7 @@ export function MovieHero() {
                             {movie.category.map((genre) => (
                               <span
                                 key={genre.id}
-                                className="bg-slate-900/70 backdrop-blur-sm text-gray-200 px-5 py-2.5 rounded-full text-sm font-medium border border-slate-700/40 hover:bg-slate-800/70 hover:border-yellow-400/30 hover:text-yellow-300 transition-all duration-300 cursor-pointer"
+                                className="bg-slate-900/70 backdrop-blur-sm text-gray-200 px-5 py-2.5 rounded-full text-sm font-medium border border-slate-700/40 hover:bg-slate-800/70 hover:border-green-400/30 hover:text-green-300 transition-all duration-300 cursor-pointer"
                               >
                                 {genre.name}
                               </span>
@@ -140,7 +140,7 @@ export function MovieHero() {
                           
                           <Button
                             size="lg"
-                            className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 hover:from-yellow-500 hover:via-orange-600 hover:to-red-600 text-black font-bold px-6 sm:px-10 py-3 sm:py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-yellow-500/25 w-full sm:w-auto"
+                            className="bg-gradient-to-r from-green-400 via-green-500 to-green-500/50 hover:from-green-500/50 hover:via-green-600 hover:to-green-600 text-black font-bold px-6 sm:px-10 py-3 sm:py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-yellow-500/25 w-full sm:w-auto"
                           >
                             <Play className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 fill-current" />
                             Xem Phim

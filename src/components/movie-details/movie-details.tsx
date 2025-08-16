@@ -20,7 +20,6 @@ export function MovieDetails({
   movieData,
   initialEpisode = 1,
   initialServer = 'vietsub',
-  slug
 }: MovieDetailsProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -69,7 +68,7 @@ export function MovieDetails({
     number: i + 1,
     title: `Tập ${i + 1}`,
     duration: movieData.time,
-    views: Math.floor(Math.random() * 100000) + 10000
+    views: movieData.view,
   }))
 
   // Transform cast data
