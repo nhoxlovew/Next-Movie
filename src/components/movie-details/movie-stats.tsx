@@ -13,7 +13,7 @@ interface MovieStatsProps {
 export function MovieStats({ rating, year, duration, views }: MovieStatsProps) {
   return (
     <div className="flex flex-wrap gap-3">
-      <Badge className="bg-gradient-to-r border-green-500/50 from-yellow-500 to-orange-500 text-black font-semibold px-3 py-1">
+      <Badge className="bg-gradient-to-r border-green-500/50 from-green-500 to-green-500 text-black font-semibold px-3 py-1">
         <Star className="w-4 h-4 mr-1" />
         IMDb {rating}
       </Badge>

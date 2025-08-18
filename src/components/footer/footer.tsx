@@ -1,4 +1,5 @@
 import { Facebook, Youtube, Instagram, Mail } from "lucide-react"
+import Image from "next/image"
 
 export function Footer() {
   return (
@@ -8,8 +9,8 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
-                <span className="text-black font-bold text-lg">R</span>
+              <div className="w-10 h-10 bg-white/30 rounded-full flex items-center justify-center">
+                <span className="text-black font-bold text-lg"><Image src="/logo/logo.png" alt="Logo" width={40} height={40} /></span>
               </div>
               <div>
                 <h3 className="text-white font-bold text-xl">KAT-VVK</h3>
@@ -21,16 +22,16 @@ export function Footer() {
               phụ đề Việt Nam.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-yellow-400 transition-colors">
+              <a href="https://www.facebook.com/hooangenh/" className="text-gray-400 hover:text-yellow-400 transition-colors">
                 <Facebook className="w-6 h-6" />
               </a>
               <a href="#" className="text-gray-400 hover:text-yellow-400 transition-colors">
                 <Youtube className="w-6 h-6" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-yellow-400 transition-colors">
+              <a href="https://www.instagram.com/_.haeng._/" className="text-gray-400 hover:text-yellow-400 transition-colors">
                 <Instagram className="w-6 h-6" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-yellow-400 transition-colors">
+              <a href="hoanganhonzed@gmail.com" className="text-gray-400 hover:text-yellow-400 transition-colors">
                 <Mail className="w-6 h-6" />
               </a>
             </div>
@@ -104,8 +105,8 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2024 BLACKKAT. Tất cả quyền được bảo lưu.
-            <span className="text-yellow-400 ml-2">Xem phim miễn phí chất lượng cao</span>
+            © 2025 BLACKKAT. Tất cả quyền được bảo lưu.
+            <span className="text-green-400 ml-2 ">Xem phim miễn phí chất lượng cao</span>
           </p>
         </div>
       </div>

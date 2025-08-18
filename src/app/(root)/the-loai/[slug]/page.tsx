@@ -1,20 +1,11 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import type { MovieItem } from "@/type/movie-list.types"
-
-interface ApiGenreResponse {
-  status: boolean | string
-  msg: string
-  data: {
-    titlePage: string
-    items: MovieItem[]
-    params: { pagination: { currentPage: number; totalPages: number } }
-    APP_DOMAIN_CDN_IMAGE?: string
-  }
-}
+import type { ApiGenreResponse } from "@/type/genre-page.types"
+import { GenreGrid } from "@/components/gerne/genre-grid"
+import { GenrePagination } from "@/components/gerne/genre-pagination"
+import { GenreGridSkeleton } from "@/components/gerne/skeletons/genre-grid-skeleton"
+import GenreHero from "@/components/gerne/genre-hero"
 
 export default function GenrePage({ params }: { params: Promise<{ slug: string }> }) {
   const [slug, setSlug] = useState<string>("")
@@ -50,52 +41,30 @@ export default function GenrePage({ params }: { params: Promise<{ slug: string }
   const pagination = data?.data?.params?.pagination
   const cdnBase = (data?.data?.APP_DOMAIN_CDN_IMAGE || "").replace(/\/$/, "")
 
-  const resolveImageUrl = (m: MovieItem): string => {
-    const raw = (m.poster_url || (m as unknown as { thumb_url?: string })?.thumb_url || "").toString()
-    if (raw.startsWith("http")) return raw
-    if (raw && cdnBase) {
-      const path = raw.startsWith("/") ? raw : `/${raw}`
-      return `${cdnBase}${path}`
-    }
-    return "/placeholder.svg?height=600&width=400"
-  }
-
   return (
     <section className="max-w-7xl mx-auto px-4 py-8">
-      
-
-      {loading && <div className="text-gray-400">Đang tải...</div>}
+      <GenreHero title={title || ''} descriptionHead={title || ''} />
+    
+      {loading && <div className="text-gray-400"><GenreGridSkeleton/></div>}
       {error && <div className="text-red-400">{error}</div>}
 
       {!loading && !error && (
-        <div><h1 className="text-2xl sm:text-3xl font-bold mb-6">Thể loại: {title}</h1>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {items.map((m) => (
-            <Link key={m._id} href={`/phim/${m.slug}`} className="group block">
-              <div className="relative aspect-[2/3] overflow-hidden rounded-lg bg-slate-900/50">
-                <Image src={resolveImageUrl(m)} alt={m.name} fill className="object-cover group-hover:scale-105 transition-transform" />
-              </div>
-              <div className="mt-2">
-                <h3 className="text-sm line-clamp-2 group-hover:text-yellow-400 transition-colors">{m.name}</h3>
-                <div className="text-xs text-gray-400 flex gap-2 mt-1">
-                  <span>{m.year}</span>
-                  <span>{m.episode_current}</span>
-                  <span>{m.quality}</span>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-        </div>
-      )}
+        <>
+          <GenreGrid 
+            items={items} 
+            cdnBase={cdnBase} 
+            title={title || ''} 
+            isLoading={loading}
+          />
 
-      {/* Simple pagination */}
-      {!!pagination && (
-        <div className="flex items-center gap-2 mt-6">
-          <button disabled={page <= 1} onClick={() => setPage((p) => Math.max(1, p - 1))} className="px-3 py-1 rounded bg-slate-800 disabled:opacity-50">Trang trước</button>
-          <span className="text-gray-400 text-sm">Trang {pagination.currentPage}/{pagination.totalPages}</span>
-          <button disabled={page >= pagination.totalPages} onClick={() => setPage((p) => Math.min(pagination.totalPages, p + 1))} className="px-3 py-1 rounded bg-slate-800 disabled:opacity-50">Trang sau</button>
-        </div>
+          {!!pagination && (
+            <GenrePagination
+              currentPage={pagination.currentPage}
+              totalPages={pagination.totalPages}
+              onPageChange={setPage}
+            />
+          )}
+        </>
       )}
     </section>
   )

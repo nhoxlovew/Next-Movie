@@ -3,7 +3,7 @@ import { NextResponse } from "next/server"
 // GET /api/the-loai/[slug]?page=1
 // Proxies PhimAPI: https://phimapi.com/v1/api/danh-sach/the-loai/{slug}?page={page}
 export async function GET(request: Request, { params }: { params: { slug: string } }) {
-  const { slug } = params
+  const { slug } = await Promise.resolve(params)
   const url = new URL(request.url)
   const page = url.searchParams.get("page") || "1"
 

@@ -42,21 +42,20 @@ export function MovieGrid() {
       
       <div className="max-w-7xl mx-auto w-full">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold bg-gradient-to-r from-green-400 via-green-500 to-green-900 bg-clip-text text-transparent mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-green-400 bg-clip-text mb-4 sm:mb-6">
             Phim Mới Cập Nhật
           </h2>
           <p className="text-gray-400 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed px-4">
             Khám phá những bộ phim mới nhất với chất lượng HD và 4K, được cập nhật liên tục mỗi ngày
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-green-400 via-green-500 to-green-900 mx-auto mt-4 sm:mt-6 rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 lg:gap-8">
           {moviesCard.map((movie) => (
             <Link
               key={movie._id}
               href={`/phim/${movie.slug}`}
-              className="group relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-2xl overflow-hidden hover:from-slate-700/50 hover:to-slate-800/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/10 border border-slate-700/30 hover:border-yellow-400/30 block cursor-pointer"
+              className="group relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-2xl overflow-hidden hover:from-slate-700/50 hover:to-slate-800/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-green-500/10 border border-green-700/30 hover:border-green-400/30 block cursor-pointer"
               onClick={() => console.log(`Navigating to: /phim/${movie.slug}`)}
             >
               <div className="relative aspect-[2/3] overflow-hidden">
@@ -89,7 +88,7 @@ export function MovieGrid() {
               </div>
 
               <div className="p-4 sm:p-6">
-                <h3 className="text-white font-bold text-lg sm:text-xl mb-3 group-hover:text-yellow-400 transition-colors duration-300 line-clamp-2">
+                <h3 className="text-white font-bold text-base sm:text-lg md:text-xl mb-3 group-hover:text-yellow-400 transition-colors duration-300 line-clamp-2">
                   {movie.name}
                 </h3>
 
@@ -100,9 +99,6 @@ export function MovieGrid() {
                       <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
                       <span className="text-xs sm:text-sm">{movie.time}</span>
                     </div>
-                  </div>
-                  <div className="flex items-center space-x-1 bg-gradient-to-r from-yellow-400/20 to-orange-500/20 px-2 sm:px-3 py-1 rounded-full self-start sm:self-auto">
-                   
                   </div>
                 </div>
 

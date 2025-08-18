@@ -29,7 +29,7 @@ export function MovieHero({ movie, isLoading = false }: MovieHeroProps) {
   }
 
   return (
-    <div className="relative h-[70vh] overflow-hidden">
+    <div className="relative min-h-[60vh] md:h-[70vh] overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${movie.backdrop})` }}
@@ -37,30 +37,30 @@ export function MovieHero({ movie, isLoading = false }: MovieHeroProps) {
       <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
 
-      <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
-        <div className="flex gap-8 max-w-6xl">
+      <div className="relative z-10 container mx-auto px-4 h-full flex items-center py-8 md:py-0">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-8 max-w-6xl">
           {/* Movie Poster */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 self-center border-green-500 rounded-xl border-1 md:self-start">
             <Image
               src={movie.poster || "/placeholder.svg"}
               alt={movie.title}
               width={256}
               height={384}
-              className="w-64 h-96 object-cover rounded-xl shadow-2xl border border-white/10"
+              className="w-40 h-60 sm:w-48 sm:h-72 md:w-64 md:h-96 object-cover rounded-xl shadow-2xl border border-white/10"
             />
           </div>
 
           {/* Movie Info */}
-          <div className="flex-1 space-y-6">
+          <div className="flex-1 space-y-4 md:space-y-6 text-center md:text-left">
             <div>
-              <h1 className="text-5xl font-bold font-serif mb-2 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold font-serif mb-2 text-green-400 bg-clip-text">
                 {movie.title}
               </h1>
-              <p className="text-xl text-gray-300 mb-4">{movie.originalTitle}</p>
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-4">{movie.originalTitle}</p>
             </div>
 
             {/* Movie Stats */}
-            <MovieStats 
+            <MovieStats
               rating={movie.rating}
               year={movie.year}
               duration={movie.duration}
@@ -71,7 +71,7 @@ export function MovieHero({ movie, isLoading = false }: MovieHeroProps) {
             <MovieInfo genres={movie.genres} />
 
             {/* Action Buttons */}
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
               <Button
                 size="lg"
                 variant="outline"
@@ -91,9 +91,9 @@ export function MovieHero({ movie, isLoading = false }: MovieHeroProps) {
             </div>
 
             {/* Description */}
-            <div className="max-w-2xl">
-              <h3 className="text-xl font-semibold mb-3">Nội dung phim</h3>
-              <p className="text-gray-300 leading-relaxed">{movie.description}</p>
+            <div className="max-w-2xl mx-auto md:mx-0">
+              <h3 className="text-lg sm:text-xl font-semibold mb-3">Nội dung phim</h3>
+              <p className="text-gray-300 leading-relaxed text-sm sm:text-base">{movie.description}</p>
             </div>
           </div>
         </div>
