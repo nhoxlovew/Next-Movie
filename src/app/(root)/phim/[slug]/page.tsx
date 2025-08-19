@@ -12,6 +12,7 @@ interface PageProps {
 
 const Page = ({ params }: PageProps) => {
   const searchParams = useSearchParams()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const router = useRouter()
   const [movieData, setMovieData] = useState<Movie | null>(null)
   const [isLoading, setIsLoading] = useState(true)

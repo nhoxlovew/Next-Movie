@@ -9,8 +9,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
@@ -23,15 +21,12 @@ import Link from "next/link"
 export function MovieHero() {
   const [heroMovies, setHeroMovies] = useState<Movie[]>([]);
   const [api, setApi] = useState<CarouselApi>()
-  const [current, setCurrent] = useState(0)
-
   useEffect(() => {
     if (!api) {
       return
     }
-    setCurrent(api.selectedScrollSnap())
     api.on("select", () => {
-      setCurrent(api.selectedScrollSnap())
+      /* no-op: can be used to track current slide */
     })
   }, [api])
 

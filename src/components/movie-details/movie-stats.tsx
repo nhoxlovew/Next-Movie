@@ -7,13 +7,10 @@ interface MovieStatsProps {
   rating: number
   year: string
   duration: string
-  views: string
- episode_current: string;
-  episode_total: string;
-
+  episode_current: string;
 }
 
-export function MovieStats({ rating, year, duration, views, episode_current, episode_total }: MovieStatsProps) {
+export function MovieStats({ rating, year, duration, episode_current }: MovieStatsProps) {
   return (
     <div className="flex flex-wrap gap-3">
       <Badge className="bg-gradient-to-r border-green-500/50 from-green-500 to-green-500 text-black font-semibold px-3 py-1">

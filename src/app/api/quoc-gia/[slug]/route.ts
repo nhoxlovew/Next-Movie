@@ -1,15 +1,24 @@
+
 import { NextResponse } from "next/server"
 
 export const runtime = "edge"
 export const revalidate = 300
 
 // Lightweight in-memory cache per runtime instance
-const cache = (globalThis as any).__countryCache || new Map<string, { data: unknown; exp: number }>()
-;(globalThis as any).__countryCache = cache
+
+type CacheValue = { data: unknown; exp: number }
+type CountryCache = Map<string, CacheValue>
+
+declare global {
+  var __countryCache: CountryCache | undefined
+}
+
+const cache: CountryCache = globalThis.__countryCache ?? new Map<string, CacheValue>()
+globalThis.__countryCache = cache
 
 // GET /api/quoc-gia/[slug]?page=1&...filters
-export async function GET(request: Request, { params }: { params: { slug: string } }) {
-  const { slug } = await Promise.resolve(params)
+export async function GET(request: Request, { params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const original = new URL(request.url)
 
   const allowed = ["page", "sort_field", "sort_type", "sort_lang", "category", "year", "limit"]
@@ -50,7 +59,8 @@ export async function GET(request: Request, { params }: { params: { slug: string
         "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400",
       },
     })
-  } catch (e) {
+
+  } catch {
     return NextResponse.json({ error: "Proxy error" }, { status: 500 })
   }
 }

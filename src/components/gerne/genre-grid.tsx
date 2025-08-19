@@ -13,7 +13,7 @@ interface GenreGridProps {
   isLoading?: boolean;
 }
 
-export function GenreGrid({ items, cdnBase, title, isLoading = false }: GenreGridProps) {
+export function GenreGrid({ items, cdnBase, isLoading = false }: GenreGridProps) {
   const resolveImageUrl = (m: MovieItem): string => {
     const raw = (m.poster_url || m.thumb_url || "").toString();
     if (raw.startsWith("http")) return raw;

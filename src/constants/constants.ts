@@ -1,9 +1,7 @@
+
 import {
   BookOpen,
   Bot,
-  Film,
-  GalleryVerticalEnd,
-  
   Settings2,
   SquareTerminal,
 } from "lucide-react"
@@ -179,13 +177,7 @@ export const data = {
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
-  logo: [
-    {
-      name: "KAT-VVK",
-      logo:  Film,
-      plan: "Watch and Chill",
-    },
-  ],
+  logo: [{ name: "KAT-VVK", logo: "/logo/logo.png", plan: "Watch and Chill" }],
   navMain: [
     {
       title: "Danh mục",

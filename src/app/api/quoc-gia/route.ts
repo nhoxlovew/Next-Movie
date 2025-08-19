@@ -14,6 +14,7 @@ export async function GET() {
       headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400" },
     })
   } catch (e) {
+    console.error("/api/quoc-gia error:", e)
     return NextResponse.json({ error: "Proxy error" }, { status: 500 })
   }
 }

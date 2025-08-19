@@ -32,7 +32,6 @@ export function MoviePlayer({
   episodes,
   movieSlug,
   selectedServer: externalSelectedServer,
-  setSelectedServer: externalSetSelectedServer,
 }: MoviePlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -41,13 +40,11 @@ export function MoviePlayer({
   const [episodeData, setEpisodeData] = useState<Episode[] | null>(null)
   const [internalSelectedServer, setInternalSelectedServer] = useState<Server | null>(null)
   const [serverData, setServerData] = useState<Server[] | null>(null)
+  // serverData is used to select internal server by name later
 
   // Use external server if provided, otherwise use internal
   const selectedServerName = externalSelectedServer || internalSelectedServer?.server_name || 'vietsub'
-  const setSelectedServerName = externalSetSelectedServer || ((serverName: string) => {
-    const server = serverData?.find(s => s.server_name === serverName)
-    if (server) setInternalSelectedServer(server)
-  })
+
   const [currentEpisodeData, setCurrentEpisodeData] = useState<Episode | null>(null)
   const [useEmbedPlayer, setUseEmbedPlayer] = useState(false)
   const hlsRef = useRef<Hls | null>(null)

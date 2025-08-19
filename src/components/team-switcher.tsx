@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-
+import Image from "next/image"
 
 import {
   DropdownMenu,
@@ -19,12 +19,12 @@ export function TeamSwitcher({
 }: {
   teams: {
     name: string
-    logo: React.ElementType
+    logo: React.ElementType | string
     plan: string
   }[]
 }) {
-  const { isMobile } = useSidebar()
-  const [activeTeam, setActiveTeam] = React.useState(teams[0])
+  const { /* isMobile */ } = useSidebar()
+  const [activeTeam] = React.useState(teams[0])
 
   if (!activeTeam) {
     return null
@@ -39,8 +39,13 @@ export function TeamSwitcher({
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                <activeTeam.logo className="size-4" />
+              <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg overflow-hidden">
+                {typeof activeTeam.logo === "string" ? (
+                  // <Image src={activeTeam.logo} alt={activeTeam.name} fill />
+                  ""
+                ) : (
+                  <activeTeam.logo className="size-4" />
+                )}
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{activeTeam.name}</span>

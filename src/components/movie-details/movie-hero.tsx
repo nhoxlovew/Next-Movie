@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Play, Heart, Share2 } from "lucide-react"
+import { Heart, Share2 } from "lucide-react"
 import Image from "next/image"
 import { MovieStats } from "./movie-stats"
 import { MovieInfo } from "./movie-info"
@@ -66,9 +66,7 @@ export function MovieHero({ movie, isLoading = false }: MovieHeroProps) {
               rating={movie.rating}
               year={movie.year}
               duration={movie.duration}
-              views={movie.views}
               episode_current={movie.episode_current}
-              episode_total={movie.episode_total}
             />
 
             {/* Movie Info */}

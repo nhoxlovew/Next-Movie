@@ -4,14 +4,20 @@ export const runtime = "edge"
 export const revalidate = 300
 
 // Lightweight in-memory cache per runtime instance
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const cache = (globalThis as any).__yearCache || new Map<string, { data: unknown; exp: number }>()
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-;(globalThis as any).__yearCache = cache
+
+type CacheValue = { data: unknown; exp: number }
+type YearCache = Map<string, CacheValue>
+
+declare global {
+  var __yearCache: YearCache | undefined
+}
+
+const cache: YearCache = globalThis.__yearCache ?? new Map<string, CacheValue>()
+globalThis.__yearCache = cache
 
 // GET /api/nam/[year]?page=1&...filters
-export async function GET(request: Request, { params }: { params: { year: string } }) {
-  const { year } = await Promise.resolve(params)
+export async function GET(request: Request, { params }: { params: Promise<{ year: string }> }) {
+  const { year } = await params
   const original = new URL(request.url)
 
   const allowed = ["page", "sort_field", "sort_type", "sort_lang", "category", "country", "limit"]
@@ -52,7 +58,7 @@ export async function GET(request: Request, { params }: { params: { year: string
         "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400",
       },
     })
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: "Proxy error" }, { status: 500 })
   }
 }
