@@ -8,7 +8,9 @@ export async function GET(request: NextRequest) {
   const apiUrl = `https://phimapi.com/danh-sach/phim-moi-cap-nhat-v3?page=${(page)}`;
 
   try {
-    const res = await fetch(apiUrl, { cache: "no-store" });
+    // Use Next.js caching to avoid duplicate upstream hits within the revalidation window.
+    // Note: In dev, React Strict Mode can still trigger multiple calls from the client.
+    const res = await fetch(apiUrl, { next: { revalidate: 60 } });
     if (!res.ok) {
       return NextResponse.json(
         { error: `Failed to fetch from PhimAPI: ${res.status}` },
@@ -16,7 +18,12 @@ export async function GET(request: NextRequest) {
       );
     }
     const data = await res.json();
-    return NextResponse.json(data);
+    return NextResponse.json(data, {
+      headers: {
+        // Helps the browser/CDN cache the API response briefly
+        "Cache-Control": "public, s-maxage=60, stale-while-revalidate=120",
+      },
+    });
 
   } catch (error) {
     return NextResponse.json(

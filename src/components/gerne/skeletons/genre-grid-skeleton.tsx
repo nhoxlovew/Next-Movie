@@ -10,12 +10,7 @@ interface GenreGridSkeletonProps {
 
 export function GenreGridSkeleton({ itemsCount = 15 }: GenreGridSkeletonProps) {
   return (
-    <div>
-      {/* Header skeleton */}
-      <div className="mb-6">
-        <Skeleton className="h-8 w-64" />
-      </div>
-
+    <div className="mt-12">
       {/* Grid skeleton */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
         {Array.from({ length: itemsCount }, (_, i) => (

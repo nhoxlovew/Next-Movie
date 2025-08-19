@@ -43,7 +43,7 @@ export default function GenrePage({ params }: { params: Promise<{ slug: string }
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-8">
-      <GenreHero title={title || ''} descriptionHead={title || ''} />
+      <GenreHero title={title || ''} descriptionHead={title || ''} isLoading={loading} />
     
       {loading && <div className="text-gray-400"><GenreGridSkeleton/></div>}
       {error && <div className="text-red-400">{error}</div>}

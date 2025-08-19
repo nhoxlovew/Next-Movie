@@ -1,14 +1,19 @@
 "use client"
 
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import { GenrePaginationSkeleton } from "./skeletons/genre-pagination-skeleton";
 
 interface GenrePaginationProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
+  isLoading?: boolean;
 }
 
-export function GenrePagination({ currentPage, totalPages, onPageChange }: GenrePaginationProps) {
+export function GenrePagination({ currentPage, totalPages, onPageChange, isLoading = false }: GenrePaginationProps) {
+  if (isLoading) return (
+    <GenrePaginationSkeleton />
+  )
   return (
     <div className="flex items-center justify-center mt-12">
       <div className="flex items-center gap-2 p-2 bg-slate-800/50 backdrop-blur-md rounded-2xl border border-slate-700/50">

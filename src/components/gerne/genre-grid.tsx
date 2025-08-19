@@ -30,16 +30,12 @@ export function GenreGrid({ items, cdnBase, title, isLoading = false }: GenreGri
 
   if (!items || items.length === 0) {
     return (
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-bold mb-6">Thể loại: {title}</h1>
         <p className="text-gray-400">Không có dữ liệu.</p>
-      </div>
     )
   }
 
   return (
-    <div>
-      <h1 className="text-2xl sm:text-3xl font-bold mb-6">Thể loại: {title}</h1>
+    <div className="mt-12">
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
         {items.map((m) => (
           <Link key={m._id} href={`/phim/${m.slug}`} className="group block">
