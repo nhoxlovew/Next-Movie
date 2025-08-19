@@ -19,6 +19,8 @@ interface MovieHeroProps {
     duration: string
     views: string
     genres: string[]
+    episode_current: string;
+    episode_total: string;
   }
   isLoading?: boolean
 }
@@ -65,6 +67,8 @@ export function MovieHero({ movie, isLoading = false }: MovieHeroProps) {
               year={movie.year}
               duration={movie.duration}
               views={movie.views}
+              episode_current={movie.episode_current}
+              episode_total={movie.episode_total}
             />
 
             {/* Movie Info */}

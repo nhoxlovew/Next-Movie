@@ -99,8 +99,8 @@ export function MovieHero() {
                         </div>
 
                         <div className="flex items-center flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
-                          <div className="flex items-center space-x-1 sm:space-x-2 bg-gradient-to-r from-green-400 via-green-500 to-green-500/50 text-black px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold shadow-xl">
-                            <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current" />
+                          <div className="flex items-center space-x-1 sm:space-x-2 bg-green-400/60 text-black px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold shadow-xl">
+                            <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current bg text-yellow-500 " />
                             <span className="text-xs font-medium hidden sm:inline">IMDb</span>
                             <span className="text-sm sm:text-lg">{movie.tmdb?.vote_average?.toFixed(1)||""}</span>
                           </div>
@@ -177,8 +177,8 @@ export function MovieHero() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 backdrop-blur-sm text-white border border-white/10 hover:border-yellow-400/50 w-10 h-10 sm:w-14 sm:h-14" />
-        <CarouselNext className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 backdrop-blur-sm text-white border border-white/10 hover:border-yellow-400/50 w-10 h-10 sm:w-14 sm:h-14" />
+        {/* <CarouselPrevious className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 backdrop-blur-sm text-white border border-white/10 hover:border-yellow-400/50 w-10 h-10 sm:w-14 sm:h-14" />
+        <CarouselNext className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 backdrop-blur-sm text-white border border-white/10 hover:border-yellow-400/50 w-10 h-10 sm:w-14 sm:h-14" /> */}
       </Carousel>
     </section>
   )

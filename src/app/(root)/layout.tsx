@@ -6,7 +6,7 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
-  BreadcrumbSeparator,
+  // BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import { Separator } from "@/components/ui/separator"
 import {
@@ -19,12 +19,17 @@ import {
 import { ReactNode } from "react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
-import { Moon, Sun } from "lucide-react"
+import { Moon, Sun, Search, User, Menu } from "lucide-react"
+
+import { SearchModal } from "@/components/sreach"
+import { useState } from "react"
 
 export default function Page({ children }: { children: ReactNode }) {
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar/>
       <SidebarInset>
           <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
             <div className="flex items-center gap-2 px-4">
@@ -40,18 +45,38 @@ export default function Page({ children }: { children: ReactNode }) {
                       Home
                     </BreadcrumbLink>
                   </BreadcrumbItem>
-                  <BreadcrumbSeparator className="hidden md:block" />
+                  {/* <BreadcrumbSeparator className="hidden md:block" /> */}
                   <BreadcrumbItem>
-                    <BreadcrumbPage>Phim</BreadcrumbPage>
+                    <BreadcrumbPage>
+                    </BreadcrumbPage>
                   </BreadcrumbItem>
                 </BreadcrumbList>
               </Breadcrumb>
               <ThemeToggle />
             </div>
+{/* Search and User */}
+            <div className="flex items-center space-x-4">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-gray-300 hover:text-white"
+                onClick={() => setIsSearchOpen(true)}
+              >
+                <Search className="w-5 h-5" />
+              </Button>
+              <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
+                <User className="w-5 h-5" />
+              </Button>
+              <Button variant="ghost" size="sm" className="md:hidden text-gray-300 hover:text-white">
+                <Menu className="w-5 h-5" />
+              </Button>
+            </div>
+            
           </header>
           <div className="flex flex-1 flex-col overflow-hidden">
            {children}
           </div>
+          <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
         </SidebarInset>
     </SidebarProvider>
   );

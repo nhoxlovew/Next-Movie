@@ -61,6 +61,8 @@ export function MovieDetails({
     views: movieData.view.toString(),
     genres: movieData.category?.map(cat => cat.name) || [],
     slug: movieData.slug,
+    episode_current: movieData.episode_current,
+    episode_total: movieData.episode_total,
   }
 
   // Transform episodes data (if available)

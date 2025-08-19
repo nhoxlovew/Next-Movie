@@ -6,7 +6,7 @@
 /* Prevent horizontal overflow */
 html, body {
   overflow-x: hidden;
-  overflow-y: scroll; /* Keep scrollbar space to prevent width jump between pages */
+  overflow-y: auto; /* Keep scrollbar space to prevent width jump between pages */
   max-width: 100vw;
   width: 100%;
 }
@@ -149,3 +149,21 @@ section, div, main {
     @apply bg-background text-foreground;
   }
 }
+
+/* Hide scrollbars but keep scrolling */
+.no-scrollbar {
+  -ms-overflow-style: none;      /* IE/Edge */
+  scrollbar-width: none;         /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;                 
+}
+
+[data-sidebar="content"] {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+[data-sidebar="content"]::-webkit-scrollbar {
+  display: none;
+}
+

@@ -20,16 +20,16 @@ import { data } from "@/constants/constants"
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
+    <Sidebar collapsible="icon" {...props} >
+      <SidebarHeader className="ml-2">
         <TeamSwitcher teams={data.logo}  />
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className="ml-2">
         <NavMain/>
       </SidebarContent>
 
-      <SidebarFooter>
+      <SidebarFooter className="ml-2">
         <NavUser user={data.user} />
       </SidebarFooter>
       

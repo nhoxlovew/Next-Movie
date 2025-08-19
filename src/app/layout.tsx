@@ -20,7 +20,7 @@ const dmSerifDisplay = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: "RoPhim - Xem Phim Online Chất Lượng Cao",
+  title: "KATVVK - Xem Phim Online Chất Lượng Cao",
   description: "Xem phim mới nhất với chất lượng HD và 4K, được cập nhật liên tục mỗi ngày. Phim Việt Nam, phim nước ngoài, phim bộ, phim lẻ đầy đủ.",
 };
 

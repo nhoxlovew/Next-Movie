@@ -168,3 +168,6 @@ export interface SearchApiResponse {
     APP_DOMAIN_CDN_IMAGE: string;
   };
 }
+
+
+

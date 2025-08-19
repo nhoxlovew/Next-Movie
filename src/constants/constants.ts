@@ -1,7 +1,9 @@
 import {
   BookOpen,
   Bot,
+  Film,
   GalleryVerticalEnd,
+  
   Settings2,
   SquareTerminal,
 } from "lucide-react"
@@ -179,9 +181,9 @@ export const data = {
   },
   logo: [
     {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
+      name: "KAT-VVK",
+      logo:  Film,
+      plan: "Watch and Chill",
     },
   ],
   navMain: [
