@@ -1,11 +1,11 @@
 "use client"
 
 import * as React from "react"
-import Image from "next/image"
 
-import {
-  DropdownMenu,
-} from "@/components/ui/dropdown-menu"
+
+// import {
+//   DropdownMenu,
+// } from "@/components/ui/dropdown-menu"
 import {
   SidebarMenu,
   SidebarMenuButton,
@@ -13,6 +13,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import Link from "next/link"
+import { CatIcon } from "lucide-react"
 
 export function TeamSwitcher({
   teams,
@@ -33,19 +34,13 @@ export function TeamSwitcher({
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <DropdownMenu>
-          <Link href={`/`}>
+          <Link href={`/`} className="flex justify-center items-center">
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground "
             >
-              <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg overflow-hidden">
-                {typeof activeTeam.logo === "string" ? (
-                  // <Image src={activeTeam.logo} alt={activeTeam.name} fill />
-                  ""
-                ) : (
-                  <activeTeam.logo className="size-4" />
-                )}
+              <div className=" text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg overflow-hidden">
+                <CatIcon className="text-green-400"/>
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{activeTeam.name}</span>
@@ -53,7 +48,7 @@ export function TeamSwitcher({
               </div>
             </SidebarMenuButton>
             </Link>
-        </DropdownMenu>
+        
       </SidebarMenuItem>
     </SidebarMenu>
   )

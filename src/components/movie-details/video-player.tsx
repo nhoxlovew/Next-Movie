@@ -39,6 +39,7 @@ export function MoviePlayer({
   const [canPlay, setCanPlay] = useState(false)
   const [episodeData, setEpisodeData] = useState<Episode[] | null>(null)
   const [internalSelectedServer, setInternalSelectedServer] = useState<Server | null>(null)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [serverData, setServerData] = useState<Server[] | null>(null)
   // serverData is used to select internal server by name later
 
@@ -247,12 +248,12 @@ export function MoviePlayer({
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-6xl mx-auto">
+    <div className="container mx-auto px-4 py-4">
+      <div className="max-w-4xl mx-auto">
         {/* Video Player */}
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center justify-between">
+            <CardTitle className="flex items-center justify-between ">
               <span>Đang xem: {currentEpisodeData?.name || `Tập ${selectedEpisode}`}</span>
               {internalSelectedServer && (
                 <Badge variant="outline">{internalSelectedServer.server_name}</Badge>
@@ -260,7 +261,7 @@ export function MoviePlayer({
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="aspect-video bg-black rounded-lg relative overflow-hidden">
+            <div className="aspect-video bg-black relative ">
               {error ? (
                 <div className="absolute inset-0 flex items-center justify-center text-center text-white bg-black/50">
                   <div>
@@ -286,7 +287,7 @@ export function MoviePlayer({
                   {useEmbedPlayer && currentEpisodeData?.link_embed ? (
                     <iframe
                       src={currentEpisodeData.link_embed}
-                      className="w-full h-full"
+                      className="w-500px h-500px"
                       allowFullScreen
                       allow="autoplay; encrypted-media"
                       title={`${currentEpisodeData.name} - ${currentEpisodeData.filename}`}
@@ -295,7 +296,7 @@ export function MoviePlayer({
                     <>
                       <video
                         ref={videoRef}
-                        className="w-full h-full"
+                        className="w-500px h-500px"
                         controls={canPlay}
                         preload="metadata"
                         crossOrigin="anonymous"
@@ -336,7 +337,7 @@ export function MoviePlayer({
         {/* Episode Navigation */}
         <div className="mt-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xl font-bold">Chọn tập</h3>
+            <h3 className="text-xl font-bold">Chọn tập:</h3>
             <div className="flex gap-2">
               <Button
                 size="sm"

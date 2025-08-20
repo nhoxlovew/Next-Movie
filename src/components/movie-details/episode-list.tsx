@@ -41,7 +41,7 @@ export function EpisodeList({
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-3xl font-bold">Danh sách tập phim</h2>
+        <h2 className="text-3xl font-bold">Danh sách tất cả các tập phim</h2>
         <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black">
           {episodes.length} tập
         </Badge>

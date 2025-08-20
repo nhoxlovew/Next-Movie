@@ -33,11 +33,11 @@ export function NavMain(
     let ignore = false
     setLoading(true)
     fetch("/api/nam")
-  .then((r) => r.json() as Promise<number[]>)
-  .then((data) => { if (!ignore) setYears(Array.isArray(data) ? data : []) })
-  .catch(() => { if (!ignore) setYears([]) })
-  .finally(() => { if (!ignore) setLoading(false) })
-    
+      .then((r) => r.json() as Promise<number[]>)
+      .then((data) => { if (!ignore) setYears(Array.isArray(data) ? data : []) })
+      .catch(() => { if (!ignore) setYears([]) })
+      .finally(() => { if (!ignore) setLoading(false) })
+
     fetch("/api/quoc-gia")
       .then((r) => r.json() as Promise<Country[]>)
       .then((data) => { if (!ignore) setCountries(Array.isArray(data) ? data : []) })
@@ -54,7 +54,7 @@ export function NavMain(
   }, [])
 
   return (
-    <SidebarGroup>
+    <SidebarGroup className="group/sidebar">
       <SidebarGroupLabel>Mục Lục</SidebarGroupLabel>
       <SidebarMenu>
         {/* Dynamic genre group */}
@@ -91,8 +91,8 @@ export function NavMain(
         </Collapsible>
 
 
-       
-        <Collapsible asChild>
+
+        <Collapsible asChild className="group/collapsible">
           <SidebarMenuItem >
             <CollapsibleTrigger asChild>
               <SidebarMenuButton>
@@ -101,9 +101,7 @@ export function NavMain(
                 <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
               </SidebarMenuButton>
             </CollapsibleTrigger>
-
-
-<CollapsibleContent>
+            <CollapsibleContent>
               <SidebarMenuSub>
                 {loading ? (
                   Array.from({ length: 12 }).map((_, i) => (
@@ -125,10 +123,10 @@ export function NavMain(
             </CollapsibleContent>
           </SidebarMenuItem>
         </Collapsible>
-  
-        
 
-        <Collapsible asChild>
+
+
+        <Collapsible asChild className="group/collapsible">
           <SidebarMenuItem>
             <CollapsibleTrigger asChild>
               <SidebarMenuButton>
@@ -137,8 +135,6 @@ export function NavMain(
                 <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
               </SidebarMenuButton>
             </CollapsibleTrigger>
-
-
             <CollapsibleContent>
               <SidebarMenuSub>
                 {loading ? (
@@ -159,8 +155,6 @@ export function NavMain(
                 )}
               </SidebarMenuSub>
             </CollapsibleContent>
-
-
           </SidebarMenuItem>
         </Collapsible>
 

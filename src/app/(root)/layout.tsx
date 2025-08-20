@@ -19,7 +19,7 @@ import {
 import { ReactNode } from "react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
-import { Moon, Sun, Search, User, Menu } from "lucide-react"
+import { Moon, Sun, Search, User } from "lucide-react"
 
 import { SearchModal } from "@/components/sreach"
 import { useState } from "react"
@@ -64,11 +64,8 @@ export default function Page({ children }: { children: ReactNode }) {
               >
                 <Search className="w-5 h-5" />
               </Button>
-              <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
+              <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white ">
                 <User className="w-5 h-5" />
-              </Button>
-              <Button variant="ghost" size="sm" className="md:hidden text-gray-300 hover:text-white">
-                <Menu className="w-5 h-5" />
               </Button>
             </div>
             

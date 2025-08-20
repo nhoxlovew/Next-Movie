@@ -4,6 +4,7 @@ import {
   BadgeCheck,
   Bell,
   ChevronsUpDown,
+  LogIn,
   LogOut,
   Sparkles,
 } from "lucide-react"
@@ -97,6 +98,10 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
+             <DropdownMenuItem>
+              <LogIn />
+              Log in
+            </DropdownMenuItem>
             <DropdownMenuItem>
               <LogOut />
               Log out

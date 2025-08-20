@@ -1,9 +1,6 @@
 
 import {
-  BookOpen,
-  Bot,
-  Settings2,
-  SquareTerminal,
+  CatIcon,
 } from "lucide-react"
 
 export const heroMovies = [
@@ -177,94 +174,25 @@ export const data = {
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
-  logo: [{ name: "KAT-VVK", logo: "/logo/logo.png", plan: "Watch and Chill" }],
-  navMain: [
-    {
-      title: "Danh mục",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Thể Loại",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Quốc Gia",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
- 
+  logo: [{ name: "KAT-VVK", logo: CatIcon, plan: "Watch and Chill" }],
 
 }
+
+
+  export const sampleComments = [
+    {
+      user: "Nguyễn Văn A",
+      time: "2 giờ trước",
+      content: "Phim hay quá! Diễn viên diễn xuất rất tự nhiên và cảm xúc.",
+    },
+    {
+      user: "Trần Thị B",
+      time: "5 giờ trước",
+      content: "Cốt truyện hấp dẫn, không thể rời mắt khỏi màn hình. Đang chờ tập tiếp theo!",
+    },
+    {
+      user: "Lê Minh C",
+      time: "1 ngày trước",
+      content: "Chất lượng hình ảnh và âm thanh tuyệt vời. Cảm ơn RoPhim đã có phim hay như vậy.",
+    },
+  ]
