@@ -287,7 +287,7 @@ export function MoviePlayer({
                   {useEmbedPlayer && currentEpisodeData?.link_embed ? (
                     <iframe
                       src={currentEpisodeData.link_embed}
-                      className="w-500px h-500px"
+                      className="w-full h-full"
                       allowFullScreen
                       allow="autoplay; encrypted-media"
                       title={`${currentEpisodeData.name} - ${currentEpisodeData.filename}`}
@@ -296,7 +296,7 @@ export function MoviePlayer({
                     <>
                       <video
                         ref={videoRef}
-                        className="w-500px h-500px"
+                        className="w-full h-full"
                         controls={canPlay}
                         preload="metadata"
                         crossOrigin="anonymous"
