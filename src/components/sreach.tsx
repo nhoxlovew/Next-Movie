@@ -86,14 +86,13 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
       <div className="w-250 h-screen max-h-screen mx-auto p-4">
         {/* Search Input */}
         <div className="relative mb-6">
-          <div className="flex items-center bg-gray-900/80 backdrop-blur-md rounded-lg border border-gray-700">
+          <div className="flex items-center bg-gray-900/80 backdrop-blur-md rounded-lg border border-green-500">
             <Search className="w-5 h-5 text-gray-400 ml-4" />
             <Input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Tìm kiếm phim, diễn viên..."
-              className="flex-1 bg-transparent border-none text-white placeholder-gray-400 focus:ring-0 focus:outline-none text-lg py-4"
-              
+              className="flex bg-transparent border-none over text-white placeholder-gray-400 focus:ring-0 focus:outline-none text-lg py-4"
             />
             <Button onClick={onClose} variant="ghost" size="sm" className="text-gray-400 hover:text-white mr-2">
               <X className="w-5 h-5" />
@@ -141,7 +140,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
                       {/* Movie Info */}
                       <div className="ml-4 flex-1 min-w-0">
-                        <h4 className="text-white font-medium text-lg group-hover:text-yellow-400 transition-colors">
+                        <h4 className="text-white font-medium text-lg group-hover:text-green-400 transition-colors">
                           {result.title}
                         </h4>
                         <p className="text-gray-400 text-sm mb-1">{result.subtitle}</p>

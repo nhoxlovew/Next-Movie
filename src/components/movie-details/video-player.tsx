@@ -59,7 +59,7 @@ export function MoviePlayer({
 
         const response = await fetch(`/api/phim/${movieSlug}`)
         const data = await response.json()
-        console.log(data)
+        // console.log(data)
 
         if (data.status && data.episodes && data.episodes.length > 0) {
           setServerData(data.episodes)

@@ -19,7 +19,7 @@ export function MovieGrid() {
           setIsLoading(true);
           const res = await fetch("api/phim-moi-cap-nhat");
           const data = await res.json();
-          console.log(data);
+          // console.log(data);
           if (data && data.items) {
             // Only take first 24 movies
             setMoviesCard(data.items.slice(0,24));
@@ -62,7 +62,9 @@ export function MovieGrid() {
                 <Image
                   src={movie.poster_url}
                   fill
+                  sizes="huh"
                   alt={movie.name}
+                  priority = {true}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
 

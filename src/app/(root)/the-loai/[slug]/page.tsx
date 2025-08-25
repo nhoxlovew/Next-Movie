@@ -26,7 +26,7 @@ export default function GenrePage({ params }: { params: Promise<{ slug: string }
     setError(null)
 
     const url = `/api/the-loai/${slug}?page=${page}`
-    console.log("[PAGE] fetching:", url)
+    // console.log("[PAGE] fetching:", url)
 
     fetch(url)
       .then(r => { if (!r.ok) throw new Error(`Fetch failed ${r.status}`) ; return r.json() })

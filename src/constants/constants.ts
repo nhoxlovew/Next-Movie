@@ -172,7 +172,7 @@ export const data = {
   user: {
     name: "shadcn",
     email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    avatar: "/icon.svg",
   },
   logo: [{ name: "KAT-VVK", logo: CatIcon, plan: "Watch and Chill" }],
 
@@ -186,13 +186,13 @@ export const data = {
       content: "Phim hay quá! Diễn viên diễn xuất rất tự nhiên và cảm xúc.",
     },
     {
-      user: "Trần Thị B",
+      user: "2loc",
       time: "5 giờ trước",
       content: "Cốt truyện hấp dẫn, không thể rời mắt khỏi màn hình. Đang chờ tập tiếp theo!",
     },
     {
       user: "Lê Minh C",
       time: "1 ngày trước",
-      content: "Chất lượng hình ảnh và âm thanh tuyệt vời. Cảm ơn RoPhim đã có phim hay như vậy.",
+      content: "Chất lượng hình ảnh và âm thanh tuyệt vời. Cảm ơn KAT đã có phim hay như vậy.",
     },
   ]

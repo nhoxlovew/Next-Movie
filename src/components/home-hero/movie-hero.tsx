@@ -49,7 +49,7 @@ export function MovieHero() {
 
 
   return (
-    <section className="relative w-full h-screen min-h-screen overflow-hidden bg-black">
+    <section className="relative w-full h-screen min-h-screen overflow-hidden rounded-2xl bg-black">
       <Carousel
         setApi={setApi}
         className="w-full h-full overflow-hidden"
@@ -126,13 +126,8 @@ export function MovieHero() {
                           </div>
                         )}
 
-                        <p className="text-gray-300 text-sm sm:text-base lg:text-lg leading-relaxed mb-8 sm:mb-10 max-w-2xl font-light">
-                          {movie.content || movie.origin_name || "Một bộ phim hấp dẫn với nội dung thú vị và diễn xuất tuyệt vời."}
-                        </p>
-
                         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5">
                           <Link href={`/phim/${movie.slug}`} >
-                          
                           <Button
                             size="lg"
                             className="bg-gradient-to-r from-green-400 via-green-500 to-green-500/50 hover:from-green-500/50 hover:via-green-600 hover:to-green-600 text-black font-bold px-6 sm:px-10 py-3 sm:py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-yellow-500/25 w-full sm:w-auto"
@@ -172,8 +167,6 @@ export function MovieHero() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {/* <CarouselPrevious className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 backdrop-blur-sm text-white border border-white/10 hover:border-yellow-400/50 w-10 h-10 sm:w-14 sm:h-14" />
-        <CarouselNext className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 backdrop-blur-sm text-white border border-white/10 hover:border-yellow-400/50 w-10 h-10 sm:w-14 sm:h-14" /> */}
       </Carousel>
     </section>
   )

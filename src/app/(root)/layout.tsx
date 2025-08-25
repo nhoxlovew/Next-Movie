@@ -29,52 +29,52 @@ export default function Page({ children }: { children: ReactNode }) {
 
   return (
     <SidebarProvider>
-      <AppSidebar/>
+      <AppSidebar />
       <SidebarInset>
-          <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
-            <div className="flex items-center gap-2 px-4">
-              <SidebarTrigger className="-ml-1" />
-              <Separator
-                orientation="vertical"
-                className="mr-2 data-[orientation=vertical]:h-4"
-              />
-              <Breadcrumb>
-                <BreadcrumbList>
-                  <BreadcrumbItem className="hidden md:block">
-                    <BreadcrumbLink href="/">
-                      Home
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                  {/* <BreadcrumbSeparator className="hidden md:block" /> */}
-                  <BreadcrumbItem>
-                    <BreadcrumbPage>
-                    </BreadcrumbPage>
-                  </BreadcrumbItem>
-                </BreadcrumbList>
-              </Breadcrumb>
-              <ThemeToggle />
-            </div>
-{/* Search and User */}
-            <div className="flex items-center space-x-4">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-gray-300 hover:text-white"
-                onClick={() => setIsSearchOpen(true)}
-              >
-                <Search className="w-5 h-5" />
-              </Button>
-              <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white ">
-                <User className="w-5 h-5" />
-              </Button>
-            </div>
-            
-          </header>
-          <div className="flex flex-1 flex-col overflow-hidden">
-           {children}
+        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+          <div className="flex items-center gap-2 px-4">
+            <SidebarTrigger className="-ml-1" />
+            <Separator
+              orientation="vertical"
+              className="mr-2 data-[orientation=vertical]:h-4"
+            />
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem className="hidden md:block">
+                  <BreadcrumbLink href="/">
+                    Home
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                {/* <BreadcrumbSeparator className="hidden md:block" /> */}
+                <BreadcrumbItem>
+                  <BreadcrumbPage>
+                  </BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+            <ThemeToggle />
           </div>
-          <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
-        </SidebarInset>
+          {/* Search and User */}
+          <div className="flex items-center space-x-4">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-gray-300 hover:text-white"
+              onClick={() => setIsSearchOpen(true)}
+            >
+              <Search className="w-5 h-5" />
+            </Button>
+            <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white ">
+              <User className="w-5 h-5" />
+            </Button>
+          </div>
+
+        </header>
+        <div className="flex flex-1 flex-col overflow-hidden">
+          {children}
+        </div>
+        <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      </SidebarInset>
     </SidebarProvider>
   );
 }
