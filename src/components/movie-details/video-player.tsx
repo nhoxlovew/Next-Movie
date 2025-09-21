@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Play, Loader2 } from "lucide-react"
 import { Episode, Server } from "@/type/movie-details.types"
 import Hls from "hls.js"
 
@@ -34,7 +33,6 @@ export function MoviePlayer({
   selectedServer: externalSelectedServer,
 }: MoviePlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [canPlay, setCanPlay] = useState(false)
   const [episodeData, setEpisodeData] = useState<Episode[] | null>(null)
@@ -54,9 +52,7 @@ export function MoviePlayer({
   useEffect(() => {
     const fetchMovieData = async () => {
       try {
-        setIsLoading(true)
         setError(null)
-
         const response = await fetch(`/api/phim/${movieSlug}`)
         const data = await response.json()
         // console.log(data)
@@ -81,17 +77,11 @@ export function MoviePlayer({
               setCurrentEpisodeData(serverEpisodes[0])
             }
           }
-        } else {
-          setError("Không tìm thấy tập phim")
-        }
+        } 
       } catch (err) {
-        setError("Lỗi khi tải dữ liệu phim")
         console.error("Error fetching movie data:", err)
-      } finally {
-        setIsLoading(false)
       }
     }
-
     if (movieSlug) {
       fetchMovieData()
     }
@@ -113,11 +103,6 @@ export function MoviePlayer({
   useEffect(() => {
     const video = videoRef.current
     if (!video || !currentEpisodeData) return
-
-    setIsLoading(true)
-    setError(null)
-    setCanPlay(false)
-
     // Clean up previous HLS instance
     if (hlsRef.current) {
       hlsRef.current.destroy()
@@ -129,11 +114,8 @@ export function MoviePlayer({
 
     if (!videoUrl) {
       setError("Không tìm thấy link video cho tập này.")
-      setIsLoading(false)
       return
     }
-
-    console.log("Loading video:", videoUrl)
 
     // For HLS streams (.m3u8)
     if (videoUrl.includes('.m3u8')) {
@@ -148,10 +130,7 @@ export function MoviePlayer({
         hlsRef.current = hls
         hls.loadSource(videoUrl)
         hls.attachMedia(video)
-
-        hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          console.log("HLS manifest parsed successfully")
-          setIsLoading(false)
+        hls.on(Hls.Events.MANIFEST_PARSED, () => { 
           setCanPlay(true)
         })
 
@@ -159,76 +138,20 @@ export function MoviePlayer({
           console.error("HLS error:", data)
           if (data.fatal) {
             setError("Không thể tải video HLS. Đang chuyển sang trình phát nhúng...")
-            setIsLoading(false)
             // Switch to embed player after 2 seconds
-            setTimeout(() => {
-              setUseEmbedPlayer(true)
-              setError(null)
-              setCanPlay(true)
-            }, 2000)
           }
         })
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         // Native HLS support (Safari)
         video.src = videoUrl
-
-        const handleLoadedMetadata = () => {
-          console.log("Native HLS loaded successfully")
-          setIsLoading(false)
-          setCanPlay(true)
-        }
-
-        const handleError = () => {
-          console.error("Native HLS loading error")
-          setError("Không thể tải video. Đang chuyển sang trình phát nhúng...")
-          setIsLoading(false)
-          setTimeout(() => {
-            setUseEmbedPlayer(true)
-            setError(null)
-            setCanPlay(true)
-          }, 2000)
-        }
-
-        video.addEventListener("loadedmetadata", handleLoadedMetadata)
-        video.addEventListener("error", handleError)
-
-        return () => {
-          video.removeEventListener("loadedmetadata", handleLoadedMetadata)
-          video.removeEventListener("error", handleError)
-        }
       } else {
         // Browser doesn't support HLS, use embed player
         console.log("Browser doesn't support HLS, using embed player")
-        setUseEmbedPlayer(true)
-        setError(null)
-        setCanPlay(true)
-        setIsLoading(false)
       }
     } else {
       // Regular video file
       video.src = videoUrl
-
-      const handleLoadedMetadata = () => {
-        console.log("Regular video loaded successfully")
-        setIsLoading(false)
-        setCanPlay(true)
-      }
-
-      const handleError = () => {
-        console.error("Regular video loading error")
-        setError("Không thể tải video. Vui lòng thử server khác.")
-        setIsLoading(false)
-      }
-
-      video.addEventListener("loadedmetadata", handleLoadedMetadata)
-      video.addEventListener("error", handleError)
-
-      return () => {
-        video.removeEventListener("loadedmetadata", handleLoadedMetadata)
-        video.removeEventListener("error", handleError)
-      }
     }
-
     return () => {
       if (hlsRef.current) {
         hlsRef.current.destroy()
@@ -237,19 +160,10 @@ export function MoviePlayer({
     }
   }, [currentEpisodeData])
 
-  const handlePlay = () => {
-    const video = videoRef.current
-    if (video && canPlay && currentEpisodeData?.link_m3u8) {
-      video.play().catch((error) => {
-        console.error("Error playing video:", error)
-        setError("Không thể phát video.")
-      })
-    }
-  }
 
   return (
     <div className="container mx-auto px-4 py-4">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         {/* Video Player */}
         <Card>
           <CardHeader>
@@ -260,35 +174,18 @@ export function MoviePlayer({
               )}
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="aspect-video bg-black relative ">
+          <CardContent className="flex items-center justify-center">
+            <div className="aspect-video bg-black relative w-auto h-auto sm:h-auto md:h-[450px] lg:h-175 rounded-lg">
               {error ? (
-                <div className="absolute inset-0 flex items-center justify-center text-center text-white bg-black/50">
-                  <div>
-                    <Play className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                    <p className="text-lg mb-2">Lỗi phát video</p>
-                    <p className="text-sm opacity-75 mb-4">{error}</p>
-                    {currentEpisodeData?.link_embed && !useEmbedPlayer && (
-                      <button
-                        onClick={() => {
-                          setUseEmbedPlayer(true)
-                          setError(null)
-                          setCanPlay(true)
-                        }}
-                        className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black px-4 py-2 rounded-lg font-semibold hover:from-yellow-600 hover:to-orange-600 transition-colors"
-                      >
-                        Thử trình phát nhúng
-                      </button>
-                    )}
+                  <div className="absolute inset-0 flex items-center justify-center text-center text-white bg-black/50">
+                  
                   </div>
-                </div>
               ) : (
                 <>
                   {useEmbedPlayer && currentEpisodeData?.link_embed ? (
                     <iframe
                       src={currentEpisodeData.link_embed}
-                      className="w-full h-full"
-                      allowFullScreen
+                      className="w-full h-full overflow-hidden rounded-lg"
                       allow="autoplay; encrypted-media"
                       title={`${currentEpisodeData.name} - ${currentEpisodeData.filename}`}
                     />
@@ -296,36 +193,12 @@ export function MoviePlayer({
                     <>
                       <video
                         ref={videoRef}
-                        className="w-full h-full"
+                        className="w-full h-full overflow-hidden rounded-lg"
                         controls={canPlay}
                         preload="metadata"
                         crossOrigin="anonymous"
                         playsInline
                       />
-
-                      {isLoading && (
-                        <div className="absolute inset-0 flex items-center justify-center text-center text-white bg-black/50">
-                          <div>
-                            <Loader2 className="w-16 h-16 mx-auto mb-4 opacity-50 animate-spin" />
-                            <p className="text-lg">Đang tải video...</p>
-                          </div>
-                        </div>
-                      )}
-
-                      {!isLoading && !canPlay && !error && (
-                        <div
-                          className="absolute inset-0 flex items-center justify-center text-center text-white bg-black/50 cursor-pointer"
-                          onClick={handlePlay}
-                        >
-                          <div>
-                            <Play className="w-16 h-16 mx-auto mb-4 opacity-50 hover:opacity-100 transition-opacity" />
-                            <p className="text-lg">Nhấn để phát</p>
-                            <p className="text-sm opacity-75">
-                              {currentEpisodeData?.filename || `Tập ${selectedEpisode}`}
-                            </p>
-                          </div>
-                        </div>
-                      )}
                     </>
                   )}
                 </>
