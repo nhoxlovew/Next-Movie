@@ -48,7 +48,6 @@ export function TeamSwitcher({
               </div>
             </SidebarMenuButton>
             </Link>
-        
       </SidebarMenuItem>
     </SidebarMenu>
   )

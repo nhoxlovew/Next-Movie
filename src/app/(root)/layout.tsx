@@ -23,6 +23,7 @@ import { Moon, Sun, Search, User } from "lucide-react"
 
 import { SearchModal } from "@/components/sreach"
 import { useState } from "react"
+import Link from "next/link"
 
 export default function Page({ children }: { children: ReactNode }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
@@ -64,9 +65,11 @@ export default function Page({ children }: { children: ReactNode }) {
             >
               <Search className="w-5 h-5" />
             </Button>
-            <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white ">
-              <User className="w-5 h-5" />
-            </Button>
+            <Link href={`/login`} className="hover:cursor-pointer">
+              <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white ">
+                <User className="w-5 h-5" />
+              </Button>
+            </Link>
           </div>
 
         </header>

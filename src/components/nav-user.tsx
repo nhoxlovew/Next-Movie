@@ -29,6 +29,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import Link from "next/link"
 
 export function NavUser({
   user,
@@ -98,9 +99,11 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-             <DropdownMenuItem>
-              <LogIn />
-              Log in
+            <DropdownMenuItem asChild>
+              <Link href="/login">
+                <LogIn />
+                Log in
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <LogOut />

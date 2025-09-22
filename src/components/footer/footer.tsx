@@ -1,9 +1,9 @@
-import { Facebook, Youtube, Instagram, Mail } from "lucide-react"
+import { Facebook, Youtube, Instagram } from "lucide-react"
 import Image from "next/image"
 
 export function Footer() {
   return (
-    <footer className="bg-black border-t border-gray-800 py-12">
+    <footer className="border-t border-gray-800 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
@@ -30,9 +30,6 @@ export function Footer() {
               </a>
               <a href="https://www.instagram.com/_.haeng._/" className="text-gray-400 hover:text-yellow-400 transition-colors">
                 <Instagram className="w-6 h-6" />
-              </a>
-              <a href="hoanganhonzed@gmail.com" className="text-gray-400 hover:text-yellow-400 transition-colors">
-                <Mail className="w-6 h-6" />
               </a>
             </div>
           </div>

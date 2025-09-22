@@ -57,14 +57,14 @@ export const GenreGrid = memo(function GenreGrid({ items, cdnBase, title, isLoad
             <Link
               key={m._id}
               href={`/phim/${m.slug}`}
-              className="group relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-2xl overflow-hidden hover:from-slate-700/50 hover:to-slate-800/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-green-500/10 border border-green-700/30 hover:border-green-400/30 block cursor-pointer"
+              className="group relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-2xl overflow-hidden hover:from-slate-700/50 hover:to-slate-800/50 transition-all duration-150 transform hover:scale-105 hover:shadow-2xl hover:shadow-green-500/10 border border-green-700/30 hover:border-green-400/30 block cursor-pointer"
             >
               <div className="relative aspect-[2/3] overflow-hidden">
                 <Image
                   src={m.imageUrl}
                   fill
                   alt={m.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-150"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                 />
 
