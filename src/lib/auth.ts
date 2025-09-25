@@ -5,9 +5,8 @@ export const auth = betterAuth({
   // Disable database for now to avoid initialization errors
   // This allows the authentication to work without database setup
   database: undefined,
-  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
+  baseURL: process.env.BETTER_AUTH_URL || "https://katchill.vercel.app",
   trustedOrigins: [
-    "http://localhost:3000",
     "https://katchill.vercel.app",
     ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`] : []),
   ],
