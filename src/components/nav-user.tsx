@@ -100,7 +100,7 @@ export function NavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link href="/login">
+              <Link href="/auth">
                 <LogIn />
                 Log in
               </Link>

@@ -1,5 +1,5 @@
 import { CatIcon } from "lucide-react"
-import { LoginForm } from "@/components/login-form"
+import { AuthForm } from "@/components/login-form"
 import Link from "next/link"
 
 export default function LoginPage() {
@@ -18,7 +18,7 @@ export default function LoginPage() {
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-md flex items-center justify-center">
-            <LoginForm className="w-xs" />
+            <AuthForm className="w-sm h-full" />
           </div>
         </div>
       </div>
@@ -33,5 +33,3 @@ export default function LoginPage() {
     </div>
   )
 }
-
-

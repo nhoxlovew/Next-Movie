@@ -1,11 +1,12 @@
 import { betterAuth } from "better-auth"
 import { nextCookies } from "better-auth/next-js"
+import Database from "better-sqlite3"
+
+const sqlite = new Database("./auth.db")
 
 export const auth = betterAuth({
-  // Disable database for now to avoid initialization errors
-  // This allows the authentication to work without database setup
-  database: undefined,
-  baseURL: process.env.BETTER_AUTH_URL || "https://katchill.vercel.app",
+  database: sqlite,
+  baseURL: process.env.BETTER_AUTH_URL || "https://katchill.vercel.app/api/auth",
   trustedOrigins: [
     "https://katchill.vercel.app",
     ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`] : []),

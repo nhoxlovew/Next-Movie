@@ -65,7 +65,7 @@ export default function Page({ children }: { children: ReactNode }) {
             >
               <Search className="w-5 h-5" />
             </Button>
-            <Link href={`/login`} className="hover:cursor-pointer">
+            <Link href={`/auth`} className="hover:cursor-pointer">
               <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white ">
                 <User className="w-5 h-5" />
               </Button>
