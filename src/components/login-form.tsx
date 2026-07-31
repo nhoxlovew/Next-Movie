@@ -128,7 +128,7 @@ export function AuthForm({
       })
     } catch (error) {
       console.error("GitHub login error:", error)
-      toast.error("GitHub login failed. Please try again.")
+      toast.error("GitHub login not configured yet.")
     } finally {
       setIsGithubLoading(false)
     }
@@ -144,7 +144,7 @@ export function AuthForm({
       })
     } catch (error) {
       console.error("Google login error:", error)
-      toast.error("Google login failed. Please try again.")
+      toast.error("Google login not configured yet.")
     } finally {
       setIsGoogleLoading(false)
     }

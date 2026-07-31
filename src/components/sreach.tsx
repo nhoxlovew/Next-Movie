@@ -1,12 +1,13 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { Search, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import Image from "next/image"
 import type { MovieItem } from "@/type/movie-list.types"
+import { useSearchDebounce } from "@/hooks/use-debounce"
 
 interface SearchResult {
   slug: string
@@ -28,27 +29,50 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [results, setResults] = useState<SearchResult[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
+  // Use debounced search query
+  const { query: debouncedQuery, isDebouncing } = useSearchDebounce(query, 300)
+
+  // Memoize search results to prevent unnecessary re-renders
+  const memoizedResults = useMemo(() => results, [results])
+
   // Debounced fetch to your search API
   useEffect(() => {
-    if (!query.trim()) {
+    if (!debouncedQuery.trim()) {
       setResults([])
       return
     }
 
     setIsLoading(true)
     const controller = new AbortController()
-    const t = setTimeout(async () => {
+
+    const fetchSearchResults = async () => {
       try {
         const params = new URLSearchParams({
-          keyword: query.trim(),
+          keyword: debouncedQuery.trim(),
           page: "1",
           limit: "10",
         })
-        const res = await fetch(`/api/tim-kiem?${params.toString()}`, { signal: controller.signal })
-        if (!res.ok) throw new Error("Search failed")
+
+        // Add cache-busting for better responsiveness
+        const timestamp = Date.now()
+        const res = await fetch(`/api/tim-kiem?${params.toString()}&t=${timestamp}`, {
+          signal: controller.signal,
+          headers: {
+            'Cache-Control': 'no-cache',
+          }
+        })
+
+        if (!res.ok) throw new Error(`Search failed: ${res.status}`)
+
         const data = await res.json()
-        const items: MovieItem[] = data?.data?.items || []
-        const cdnBase = (data?.data?.APP_DOMAIN_CDN_IMAGE || "").replace(/\/$/, "")
+
+        if (!data?.data?.items) {
+          setResults([])
+          return
+        }
+
+        const items: MovieItem[] = data.data.items
+        const cdnBase = (data.data.APP_DOMAIN_CDN_IMAGE || "").replace(/\/$/, "")
 
         const mapped: SearchResult[] = items.map((m: MovieItem) => ({
           slug: m.slug,
@@ -63,21 +87,24 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
               ? `${cdnBase}/${(m.poster_url || m.thumb_url).replace(/^\//, "")}`
               : "/placeholder.svg?height=120&width=80",
         }))
+
         setResults(mapped)
       } catch (e) {
         if (!(e instanceof DOMException && e.name === "AbortError")) {
-          console.error(e)
+          console.error("Search error:", e)
+          setResults([])
         }
       } finally {
         setIsLoading(false)
       }
-    }, 350)
+    }
+
+    fetchSearchResults()
 
     return () => {
-      clearTimeout(t)
       controller.abort()
     }
-  }, [query])
+  }, [debouncedQuery])
 
   if (!isOpen) return null
 
@@ -115,9 +142,10 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
             {/* Results List */}
             <div className="p-2">
-              {isLoading ? (
+              {isDebouncing ? (
                 <div className="flex items-center justify-center py-8">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-400"></div>
+                  {isDebouncing && <span className="ml-2 text-gray-400">Đang tìm kiếm...</span>}
                 </div>
               ) : results.length > 0 ? (
                 <div className="space-y-2">

@@ -8,8 +8,7 @@ import { MovieGridSkeleton } from "./skeletons/movie-grid-skeleton";
 import { Movie } from "@/type/movie-details.types";
 
 
-
-export function MovieGrid() {
+export function   MovieGrid() {
   const [moviesCard, setMoviesCard] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -50,22 +49,26 @@ export function MovieGrid() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-6 lg:gap-8">
           {moviesCard.map((movie) => (
             <Link
               key={movie._id}
               href={`/phim/${movie.slug}`}
-              className="group relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-2xl overflow-hidden hover:from-slate-700/50 hover:to-slate-800/50 transition-all duration-150 transform hover:scale-105 hover:shadow-2xl hover:shadow-green-500/10 border border-green-700/30 hover:border-green-400/30 block cursor-pointer"
+              className="group relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-2xl overflow-hidden hover:from-slate-700/50 hover:to-slate-800/50 transition-all duration-150 transform hover:scale-103 hover:shadow-2xl border border-green-700/30 hover:border-green-400/30 block cursor-pointer"
               onClick={() => console.log(`Navigating to: /phim/${movie.slug}`)}
             >
               <div className="relative aspect-[2/3] overflow-hidden">
                 <Image
                   src={movie.poster_url}
                   fill
-                  sizes="huh"
+                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
                   alt={movie.name}
-                  priority = {true}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  priority={false}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-550"
+                  onError={(e) => {
+                    e.currentTarget.src = '/placeholder-movie.jpg'
+                  }}
+                  loading="lazy"
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />

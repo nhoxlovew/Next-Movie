@@ -8,7 +8,7 @@ const page = () => {
     <>
       <MovieHero />
       <MovieGrid />
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }

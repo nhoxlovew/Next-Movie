@@ -7,6 +7,7 @@ const sqlite = new Database("./auth.db")
 export const auth = betterAuth({
   database: sqlite,
   baseURL: process.env.BETTER_AUTH_URL || "https://katchill.vercel.app/api/auth",
+  secret: process.env.BETTER_AUTH_SECRET,
   trustedOrigins: [
     "https://katchill.vercel.app",
     ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`] : []),
@@ -16,14 +17,19 @@ export const auth = betterAuth({
     requireEmailVerification: false, // Set to true in production
   },
   socialProviders: {
-    github: {
-      clientId: process.env.GITHUB_CLIENT_ID || "",
-      clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
-    },
-    google: {
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-    },
+    // Only enable if credentials are provided
+    ...(process.env.GITHUB_CLIENT_ID && process.env.GITHUB_CLIENT_SECRET ? {
+      github: {
+        clientId: process.env.GITHUB_CLIENT_ID,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      }
+    } : {}),
+    ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET ? {
+      google: {
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      }
+    } : {}),
   },
   plugins: [nextCookies()],
 })

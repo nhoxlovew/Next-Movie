@@ -13,7 +13,7 @@ const cache = (globalThis as any).__genreCache || new Map<string, { data: unknow
 ;(globalThis as any).__genreCache = cache
 
 // GET /api/the-loai/[slug]?page=1
-// Proxies PhimAPI: https://phimapi.com/v1/api/danh-sach/the-loai/{slug}?page={page}
+// Proxies PhimAPI: https://phimapi.com/v1/api/the-loai/{slug}?page={page}
 export async function GET(request: Request, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const url = new URL(request.url)

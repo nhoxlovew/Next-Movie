@@ -97,6 +97,7 @@ export function MovieHero({ movie, isLoading = false }: MovieHeroProps) {
               <h3 className="text-lg sm:text-xl font-semibold mb-3">Nội dung phim</h3>
               <p className="text-gray-300 leading-relaxed text-sm sm:text-base">{movie.description}</p>
             </div>
+            
           </div>
         </div>
       </div>

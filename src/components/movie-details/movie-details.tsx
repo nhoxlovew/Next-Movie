@@ -9,6 +9,10 @@ import { MovieComments } from "./movie-comments"
 import { Movie } from "@/type/movie-details.types"
 import { MoviePlayer } from "./video-player"
 
+function stripHtmlTags(value: string) {
+  return value.replace(/<[^>]+>/g, "").trim()
+}
+
 interface MovieDetailsProps {
   movieData: Movie
   initialEpisode?: number
@@ -54,7 +58,7 @@ export function MovieDetails({
     poster: movieData.poster_url,
     title: movieData.name,
     originalTitle: movieData.origin_name,
-    description: movieData.content,
+    description: stripHtmlTags(movieData.content),
     rating: movieData.tmdb?.vote_average || 0,
     year: movieData.year.toString(),
     duration: movieData.time,
