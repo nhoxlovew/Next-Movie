@@ -29,7 +29,7 @@ export default function Page({ children }: { children: ReactNode }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
 
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={false}>
       <AppSidebar />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">

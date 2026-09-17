@@ -196,3 +196,22 @@ export const data = {
       content: "Chất lượng hình ảnh và âm thanh tuyệt vời. Cảm ơn KAT đã có phim hay như vậy.",
     },
   ]
+
+
+  export interface MovieHeroProps {
+    movie: {
+      backdrop: string
+      poster: string
+      title: string
+      originalTitle: string
+      description: string
+      rating: number
+      year: string
+      duration: string
+      views: string
+      genres: string[]
+      episode_current: string;
+      episode_total: string;
+    }
+    isLoading?: boolean
+  }

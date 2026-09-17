@@ -1,6 +1,5 @@
 "use client"
 
-
 import { useEffect, useState } from "react"
 import { CalendarSearch, ChevronRight, Globe, SmilePlus } from "lucide-react"
 import type { Category } from "@/type/movie-list.types"
@@ -27,28 +26,29 @@ export function NavMain(
   const [countries, setCountries] = useState<Country[]>([])
   const [genres, setGenres] = useState<Category[]>([])
   const [years, setYears] = useState<number[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loadingCountries, setLoadingCountries] = useState(true)
+  const [loadingGenres, setLoadingGenres] = useState(true)
+  const [loadingYears, setLoadingYears] = useState(true)
 
   useEffect(() => {
     let ignore = false
-    setLoading(true)
     fetch("/api/nam")
       .then((r) => r.json() as Promise<number[]>)
       .then((data) => { if (!ignore) setYears(Array.isArray(data) ? data : []) })
       .catch(() => { if (!ignore) setYears([]) })
-      .finally(() => { if (!ignore) setLoading(false) })
+      .finally(() => { if (!ignore) setLoadingYears(false) })
 
     fetch("/api/quoc-gia")
       .then((r) => r.json() as Promise<Country[]>)
       .then((data) => { if (!ignore) setCountries(Array.isArray(data) ? data : []) })
       .catch(() => { if (!ignore) setCountries([]) })
-      .finally(() => { if (!ignore) setLoading(false) })
+      .finally(() => { if (!ignore) setLoadingCountries(false) })
 
     fetch("/api/the-loai")
       .then((r) => r.json() as Promise<Category[]>)
       .then((data) => { if (!ignore) setGenres(Array.isArray(data) ? data : []) })
       .catch(() => { if (!ignore) setGenres([]) })
-      .finally(() => { if (!ignore) setLoading(false) })
+      .finally(() => { if (!ignore) setLoadingGenres(false) })
     return () => { ignore = true }
 
   }, [])
@@ -69,7 +69,7 @@ export function NavMain(
             </CollapsibleTrigger>
             <CollapsibleContent>
               <SidebarMenuSub>
-                {loading ? (
+                {loadingGenres ? (
                   Array.from({ length: 12 }).map((_, i) => (
                     <SidebarMenuSubItem key={`s-${i}`}>
                     </SidebarMenuSubItem>
@@ -103,7 +103,7 @@ export function NavMain(
             </CollapsibleTrigger>
             <CollapsibleContent>
               <SidebarMenuSub>
-                {loading ? (
+                {loadingCountries ? (
                   Array.from({ length: 12 }).map((_, i) => (
                     <SidebarMenuSubItem key={`s-${i}`}>
                     </SidebarMenuSubItem>
@@ -137,7 +137,7 @@ export function NavMain(
             </CollapsibleTrigger>
             <CollapsibleContent>
               <SidebarMenuSub>
-                {loading ? (
+                {loadingYears ? (
                   Array.from({ length: 12 }).map((_, i) => (
                     <SidebarMenuSubItem key={`s-${i}`}>
                     </SidebarMenuSubItem>
