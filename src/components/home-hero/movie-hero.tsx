@@ -37,7 +37,7 @@ export function MovieHero() {
         const data = await res.json();
         console.log(data);
         if (data && data.items) {  
-          // Only take first 5 movies
+          // Only take first 10 movies
           setHeroMovies(data.items.slice(0, 10));
         }
       } catch (error) {

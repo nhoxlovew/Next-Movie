@@ -1,19 +1,27 @@
-import {
-  CatIcon,
-} from "lucide-react"
+import { MovieItem } from "@/type/genre-page.types";
+import { Movie } from "@/type/movie-details.types";
+import { CatIcon } from "lucide-react";
 
 export const heroMovies = [
   {
     id: 1,
     title: "THẾ GIỚI KHỦNG LONG",
     englishTitle: "Jurassic World Rebirth",
-    backgroundImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-TvxQWzxaNSoeLXas3vwOSjtvqU9lpN.png",
+    backgroundImage:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-TvxQWzxaNSoeLXas3vwOSjtvqU9lpN.png",
     logo: "/placeholder.svg?height=80&width=80",
     imdbRating: 6.2,
     quality: "4K",
     duration: "1h 16m",
     year: "2025",
-    genres: ["Chiếu Rạp", "Gay Cấn", "Khoa Học", "Bí Ẩn", "Phiêu Lưu", "Giả Tưởng"],
+    genres: [
+      "Chiếu Rạp",
+      "Gay Cấn",
+      "Khoa Học",
+      "Bí Ẩn",
+      "Phiêu Lưu",
+      "Giả Tưởng",
+    ],
     description:
       "Phim lấy bối cảnh 5 năm sau phần phim Thế Giới Khủng Long: Lãnh Địa (Jurassic World: Dominion). Thế Giới Khủng Long: Tái Sinh mở ra một chương mới đầy tính hành động, chúng kiến một đội khai thác thác dưa đến nơi nguy hiểm nhất trên Đất.",
   },
@@ -45,19 +53,28 @@ export const heroMovies = [
     description:
       "Sau những sự kiện tàn khốc của Infinity War, vũ trụ đang trong tình trạng hỗn loạn. Với sự giúp đỡ của các đồng minh còn lại, các Avengers tập hợp một lần nữa để đảo ngược hành động của Thanos và khôi phục lại trật tự của vũ trụ.",
   },
-]
+];
 
 export const relatedMovies = [
   { id: 1, image: "/placeholder.svg?height=120&width=80", title: "Fast X" },
   { id: 2, image: "/placeholder.svg?height=120&width=80", title: "Dune 2" },
   { id: 3, image: "/placeholder.svg?height=120&width=80", title: "The Flash" },
-  { id: 4, image: "/placeholder.svg?height=120&width=80", title: "John Wick 4" },
-  { id: 5, image: "/placeholder.svg?height=120&width=80", title: "Indiana Jones" },
-  { id: 6, image: "/placeholder.svg?height=120&width=80", title: "Guardians 3" },
-]
-
-
-
+  {
+    id: 4,
+    image: "/placeholder.svg?height=120&width=80",
+    title: "John Wick 4",
+  },
+  {
+    id: 5,
+    image: "/placeholder.svg?height=120&width=80",
+    title: "Indiana Jones",
+  },
+  {
+    id: 6,
+    image: "/placeholder.svg?height=120&width=80",
+    title: "Guardians 3",
+  },
+];
 
 export const movies = [
   {
@@ -132,39 +149,69 @@ export const movies = [
     views: "1.6M",
     trending: false,
   },
-]
+];
 
-
-
-  export const movie = {
-    title: "Thử Thách Thần Tượng",
-    originalTitle: "Challenge Idol",
-    year: "2024",
-    duration: "45 phút/tập",
-    rating: 8.5,
-    views: "1.2M",
-    genres: ["Thực Tế", "Giải Trí", "Âm Nhạc", "Thi Đấu"],
-    description:
-      "Thử Thách Thần Tượng là chương trình thực tế âm nhạc đầy kịch tính, nơi các thí sinh tài năng từ khắp nơi quy tụ để tranh tài và chứng minh khả năng của mình. Với những thử thách đa dạng từ hát, nhảy đến diễn xuất, chương trình hứa hẹn mang đến những màn trình diễn spectacular và cảm xúc.",
-    poster: "/placeholder.svg?height=600&width=400",
-    backdrop: "/placeholder.svg?height=800&width=1400",
-    episodes: Array.from({ length: 24 }, (_, i) => ({
-      number: i + 1,
-      title: `Tập ${i + 1}`,
-      duration: "45:30",
-      views: Math.floor(Math.random() * 500000) + 100000,
-    })),
-    cast: [
-      { name: "Lee Min Ho", role: "MC chính", avatar: "/placeholder.svg?height=80&width=80" },
-      { name: "Park Shin Hye", role: "Giám khảo", avatar: "/placeholder.svg?height=80&width=80" },
-      { name: "Kim Soo Hyun", role: "Mentor", avatar: "/placeholder.svg?height=80&width=80" },
-      { name: "Song Hye Kyo", role: "Giám khảo", avatar: "/placeholder.svg?height=80&width=80" },
-      { name: "Jung Hae In", role: "Mentor", avatar: "/placeholder.svg?height=80&width=80" },
-      { name: "IU", role: "Khách mời", avatar: "/placeholder.svg?height=80&width=80" },
-      { name: "BTS RM", role: "Khách mời", avatar: "/placeholder.svg?height=80&width=80" },
-      { name: "BLACKPINK Lisa", role: "Khách mời", avatar: "/placeholder.svg?height=80&width=80" },
-    ],
-  }
+export const movie = {
+  title: "Thử Thách Thần Tượng",
+  originalTitle: "Challenge Idol",
+  year: "2024",
+  duration: "45 phút/tập",
+  rating: 8.5,
+  views: "1.2M",
+  genres: ["Thực Tế", "Giải Trí", "Âm Nhạc", "Thi Đấu"],
+  description:
+    "Thử Thách Thần Tượng là chương trình thực tế âm nhạc đầy kịch tính, nơi các thí sinh tài năng từ khắp nơi quy tụ để tranh tài và chứng minh khả năng của mình. Với những thử thách đa dạng từ hát, nhảy đến diễn xuất, chương trình hứa hẹn mang đến những màn trình diễn spectacular và cảm xúc.",
+  poster: "/placeholder.svg?height=600&width=400",
+  backdrop: "/placeholder.svg?height=800&width=1400",
+  episodes: Array.from({ length: 24 }, (_, i) => ({
+    number: i + 1,
+    title: `Tập ${i + 1}`,
+    duration: "45:30",
+    views: Math.floor(Math.random() * 500000) + 100000,
+  })),
+  cast: [
+    {
+      name: "Lee Min Ho",
+      role: "MC chính",
+      avatar: "/placeholder.svg?height=80&width=80",
+    },
+    {
+      name: "Park Shin Hye",
+      role: "Giám khảo",
+      avatar: "/placeholder.svg?height=80&width=80",
+    },
+    {
+      name: "Kim Soo Hyun",
+      role: "Mentor",
+      avatar: "/placeholder.svg?height=80&width=80",
+    },
+    {
+      name: "Song Hye Kyo",
+      role: "Giám khảo",
+      avatar: "/placeholder.svg?height=80&width=80",
+    },
+    {
+      name: "Jung Hae In",
+      role: "Mentor",
+      avatar: "/placeholder.svg?height=80&width=80",
+    },
+    {
+      name: "IU",
+      role: "Khách mời",
+      avatar: "/placeholder.svg?height=80&width=80",
+    },
+    {
+      name: "BTS RM",
+      role: "Khách mời",
+      avatar: "/placeholder.svg?height=80&width=80",
+    },
+    {
+      name: "BLACKPINK Lisa",
+      role: "Khách mời",
+      avatar: "/placeholder.svg?height=80&width=80",
+    },
+  ],
+};
 
 // This is sample data.
 export const data = {
@@ -174,43 +221,125 @@ export const data = {
     avatar: "/icon.svg",
   },
   logo: [{ name: "KAT-VVK", logo: CatIcon, plan: "Watch and Chill" }],
+};
 
+export const sampleComments = [
+  {
+    user: "Nguyễn Văn A",
+    time: "2 giờ trước",
+    content: "Phim hay quá! Diễn viên diễn xuất rất tự nhiên và cảm xúc.",
+  },
+  {
+    user: "2loc",
+    time: "5 giờ trước",
+    content:
+      "Cốt truyện hấp dẫn, không thể rời mắt khỏi màn hình. Đang chờ tập tiếp theo!",
+  },
+  {
+    user: "Lê Minh C",
+    time: "1 ngày trước",
+    content:
+      "Chất lượng hình ảnh và âm thanh tuyệt vời. Cảm ơn KAT đã có phim hay như vậy.",
+  },
+];
+
+export interface MovieHeroProps {
+  movie: {
+    backdrop: string;
+    poster: string;
+    title: string;
+    originalTitle: string;
+    description: string;
+    rating: number;
+    year: string;
+    duration: string;
+    views: string;
+    genres: string[];
+    episode_current: string;
+    episode_total: string;
+  };
+  isLoading?: boolean;
+}
+
+export interface GenreGridProps {
+  items: MovieItem[] | null | undefined;
+  cdnBase: string;
+  title: string;
+  isLoading?: boolean;
+}
+
+export interface GenreHeroProps {
+  title: string;
+  descriptionHead: string;
+  isLoading?: boolean;
+}
+
+export interface GenrePaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+  isLoading?: boolean;
+}
+
+export interface CastMember {
+  name: string;
+  role: string;
+}
+
+export interface CastCrewProps {
+  cast: CastMember[];
+  isLoading?: boolean;
+}
+
+export interface Episode {
+  number: number;
+  duration: string;
+}
+
+export interface EpisodeListProps {
+  episodes: Episode[];
+  isLoading?: boolean;
+  selectedEpisode?: number;
+  setSelectedEpisode?: (episode: number) => void;
+}
+
+export interface MovieCommentsProps {
+  isLoading?: boolean;
+}
+
+export interface MovieDetailsProps {
+  movieData: Movie;
+  initialEpisode?: number;
+  initialServer?: string;
+  slug?: string;
+}
+
+export interface MovieInfoProps {
+  genres: string[]
+}
+
+export interface MovieStatsProps {
+  rating: number
+  year: string
+  duration: string
+  episode_current: string;
 }
 
 
-  export const sampleComments = [
-    {
-      user: "Nguyễn Văn A",
-      time: "2 giờ trước",
-      content: "Phim hay quá! Diễn viên diễn xuất rất tự nhiên và cảm xúc.",
-    },
-    {
-      user: "2loc",
-      time: "5 giờ trước",
-      content: "Cốt truyện hấp dẫn, không thể rời mắt khỏi màn hình. Đang chờ tập tiếp theo!",
-    },
-    {
-      user: "Lê Minh C",
-      time: "1 ngày trước",
-      content: "Chất lượng hình ảnh và âm thanh tuyệt vời. Cảm ơn KAT đã có phim hay như vậy.",
-    },
-  ]
+export interface LocalEpisode {
+  number: number
+  title: string
+  duration: string
+  views: number
+}
 
-
-  export interface MovieHeroProps {
-    movie: {
-      backdrop: string
-      poster: string
-      title: string
-      originalTitle: string
-      description: string
-      rating: number
-      year: string
-      duration: string
-      views: string
-      genres: string[]
-      episode_current: string;
-      episode_total: string;
-    }
-    isLoading?: boolean
-  }
+export interface MoviePlayerProps {
+  selectedEpisode: number
+  setSelectedEpisode: (episode: number) => void
+  episodes: LocalEpisode[]
+  movieBackdrop: string
+  movieTitle: string
+  movieSlug: string
+  selectedServer?: string
+  setSelectedServer?: (server: string) => void
+}

@@ -1,42 +1,29 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Badge } from "@/components/ui/badge"
-import { Card } from "@/components/ui/card"
-import { EpisodeListSkeleton } from "./skeletons/episode-list-skeleton"
-
-interface Episode {
-  number: number
-  duration: string
-  
-}
-
-interface EpisodeListProps {
-  episodes: Episode[]
-  isLoading?: boolean
-  selectedEpisode?: number
-  setSelectedEpisode?: (episode: number) => void
-}
+import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { EpisodeListSkeleton } from "./skeletons/episode-list-skeleton";
+import { EpisodeListProps } from "@/constants/constants";
 
 export function EpisodeList({
   episodes,
   isLoading = false,
   selectedEpisode: externalSelectedEpisode,
-  setSelectedEpisode: externalSetSelectedEpisode
+  setSelectedEpisode: externalSetSelectedEpisode,
 }: EpisodeListProps) {
-  const [internalSelectedEpisode, setInternalSelectedEpisode] = useState(1)
+  const [internalSelectedEpisode, setInternalSelectedEpisode] = useState(1);
 
   // Use external state if provided, otherwise use internal state
-  const selectedEpisode = externalSelectedEpisode ?? internalSelectedEpisode
-  const setSelectedEpisode = externalSetSelectedEpisode ?? setInternalSelectedEpisode
+  const selectedEpisode = externalSelectedEpisode ?? internalSelectedEpisode;
+  const setSelectedEpisode =
+    externalSetSelectedEpisode ?? setInternalSelectedEpisode;
 
   if (isLoading) {
-    return <EpisodeListSkeleton />
+    return <EpisodeListSkeleton />;
   }
-  if(episodes.length < 2) {
-     
+  if (episodes.length < 2) {
   }
-
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -56,17 +43,15 @@ export function EpisodeList({
                 ? "bg-gradient-to-br from-yellow-500/20 to-orange-500/20 border-yellow-500/50"
                 : "bg-gray-900/50 border-gray-700 hover:bg-gray-800/50 hover:border-gray-600"
             }`}
-            
             onClick={() => setSelectedEpisode(episode.number)}
           >
             <div className="text-center">
               <div className="text-lg font-bold mb-1">Tập {episode.number}</div>
               <div className="text-sm text-gray-400">{episode.duration}</div>
-
             </div>
           </Card>
         ))}
       </div>
     </div>
-  )
+  );
 }

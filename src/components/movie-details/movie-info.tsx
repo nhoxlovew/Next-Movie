@@ -1,10 +1,8 @@
 "use client"
 
 import { Badge } from "@/components/ui/badge"
+import { MovieInfoProps } from "@/constants/constants"
 
-interface MovieInfoProps {
-  genres: string[]
-}
 
 export function MovieInfo({ genres }: MovieInfoProps) {
   return (

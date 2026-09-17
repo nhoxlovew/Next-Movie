@@ -1,15 +1,7 @@
 "use client"
+import { CastCrewProps } from "@/constants/constants"
 import { CastCrewSkeleton } from "./skeletons/cast-crew-skeleton"
 
-interface CastMember {
-  name: string
-  role: string
-}
-
-interface CastCrewProps {
-  cast: CastMember[]
-  isLoading?: boolean
-}
 
 export function CastCrew({ cast, isLoading = false }: CastCrewProps) {
   if (isLoading) {

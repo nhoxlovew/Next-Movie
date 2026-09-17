@@ -1,14 +1,9 @@
 "use client"
 
 import { Badge } from "@/components/ui/badge"
+import { MovieStatsProps } from "@/constants/constants"
 import { Star, Calendar, Clock, Eye } from "lucide-react"
 
-interface MovieStatsProps {
-  rating: number
-  year: string
-  duration: string
-  episode_current: string;
-}
 
 export function MovieStats({ rating, year, duration, episode_current }: MovieStatsProps) {
   return (

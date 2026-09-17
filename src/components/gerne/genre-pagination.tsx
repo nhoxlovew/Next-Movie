@@ -2,13 +2,7 @@
 
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { GenrePaginationSkeleton } from "./skeletons/genre-pagination-skeleton";
-
-interface GenrePaginationProps {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-  isLoading?: boolean;
-}
+import { GenrePaginationProps } from "@/constants/constants";
 
 export function GenrePagination({ currentPage, totalPages, onPageChange, isLoading = false }: GenrePaginationProps) {
   if (isLoading) return (

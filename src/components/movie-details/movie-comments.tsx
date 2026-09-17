@@ -6,11 +6,8 @@ import { Card } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Textarea } from "@/components/ui/textarea"
 import { MovieCommentsSkeleton } from "./skeletons/movie-comments-skeleton"
-import { sampleComments } from "@/constants/constants"
+import { MovieCommentsProps, sampleComments } from "@/constants/constants"
 
-interface MovieCommentsProps {
-  isLoading?: boolean
-}
 
 export function MovieComments({ isLoading = false }: MovieCommentsProps) {
   const [comment, setComment] = useState("")

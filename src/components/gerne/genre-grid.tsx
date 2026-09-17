@@ -3,17 +3,11 @@
 import Link from "next/link"
 import Image from "next/image"
 import { MovieItem } from "@/type/genre-page.types"
-
 import { GenreGridSkeleton } from "./skeletons/genre-grid-skeleton"
 import { Heart } from "lucide-react"
 import { memo, useCallback, useMemo } from "react"
+import { GenreGridProps } from "@/constants/constants"
 
-interface GenreGridProps {
-  items: MovieItem[] | null | undefined;
-  cdnBase: string;
-  title: string;
-  isLoading?: boolean;
-}
 
 export const GenreGrid = memo(function GenreGrid({ items, cdnBase, title, isLoading = false }: GenreGridProps) {
   const resolveImageUrl = useCallback((m: MovieItem): string => {

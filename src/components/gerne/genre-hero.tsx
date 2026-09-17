@@ -3,15 +3,9 @@
 import { Film } from 'lucide-react'
 import React from 'react'
 import GenreHeroSkeleton from './skeletons/genre-hero-skeleton';
+import { GenreHeroProps } from '@/constants/constants';
 
-interface GenreHeroProps {
-  title: string;
-  descriptionHead: string;
-  isLoading?: boolean;
-}
  
-
-
 const GenreHero = ({ title, descriptionHead, isLoading = false }: GenreHeroProps) => {
   if (isLoading) return <GenreHeroSkeleton />
 

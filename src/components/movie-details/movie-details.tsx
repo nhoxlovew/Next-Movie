@@ -8,17 +8,12 @@ import { CastCrew } from "./cast-crew"
 import { MovieComments } from "./movie-comments"
 import { Movie } from "@/type/movie-details.types"
 import { MoviePlayer } from "./video-player"
+import { MovieDetailsProps } from "@/constants/constants"
 
 function stripHtmlTags(value: string) {
   return value.replace(/<[^>]+>/g, "").trim()
 }
 
-interface MovieDetailsProps {
-  movieData: Movie
-  initialEpisode?: number
-  initialServer?: string
-  slug?: string
-}
 
 export function MovieDetails({
   movieData,
