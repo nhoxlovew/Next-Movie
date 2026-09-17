@@ -6,24 +6,9 @@ import Image from "next/image"
 import { MovieStats } from "./movie-stats"
 import { MovieInfo } from "./movie-info"
 import { MovieHeroSkeleton } from "./skeletons/movie-hero-skeleton"
+import { MovieHeroProps } from "@/constants/constants"
 
-interface MovieHeroProps {
-  movie: {
-    backdrop: string
-    poster: string
-    title: string
-    originalTitle: string
-    description: string
-    rating: number
-    year: string
-    duration: string
-    views: string
-    genres: string[]
-    episode_current: string;
-    episode_total: string;
-  }
-  isLoading?: boolean
-}
+
 
 export function MovieHero({ movie, isLoading = false }: MovieHeroProps) {
   if (isLoading) {
@@ -95,7 +80,7 @@ export function MovieHero({ movie, isLoading = false }: MovieHeroProps) {
             {/* Description */}
             <div className="max-w-2xl mx-auto md:mx-0">
               <h3 className="text-lg sm:text-xl font-semibold mb-3">Nội dung phim</h3>
-              <p className="text-gray-300 leading-relaxed text-sm sm:text-base">{movie.description}</p>
+              <div className="text-gray-300 leading-relaxed text-sm sm:text-base">{movie.description}</div>
             </div>
             
           </div>

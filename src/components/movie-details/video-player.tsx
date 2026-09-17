@@ -135,10 +135,29 @@ export function MoviePlayer({
         })
 
         hls.on(Hls.Events.ERROR, (_, data) => {
-          console.error("HLS error:", data)
+          const details = {
+            type: data.type,
+            details: data.details,
+            fatal: data.fatal,
+            url: videoUrl,
+          }
+
           if (data.fatal) {
-            setError("Không thể tải video HLS. Đang chuyển sang trình phát nhúng...")
-            // Switch to embed player after 2 seconds
+            console.error("Fatal HLS error:", details)
+          } else {
+            console.warn("Recoverable HLS warning:", details)
+          }
+
+          if (data.fatal) {
+            hls.destroy()
+            hlsRef.current = null
+
+            if (currentEpisodeData.link_embed) {
+              setError(null)
+              setUseEmbedPlayer(true)
+            } else {
+              setError("Không thể tải video HLS cho tập này.")
+            }
           }
         })
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
@@ -146,7 +165,10 @@ export function MoviePlayer({
         video.src = videoUrl
       } else {
         // Browser doesn't support HLS, use embed player
-        console.log("Browser doesn't support HLS, using embed player")
+        setUseEmbedPlayer(Boolean(currentEpisodeData.link_embed))
+        if (!currentEpisodeData.link_embed) {
+          setError("Trình duyệt không hỗ trợ định dạng video này.")
+        }
       }
     } else {
       // Regular video file
@@ -176,10 +198,10 @@ export function MoviePlayer({
           </CardHeader>
           <CardContent className="flex items-center justify-center">
             <div className="aspect-video bg-black relative w-auto h-auto sm:h-auto md:h-[450px] lg:h-175 rounded-lg">
-              {error ? (
-                  <div className="absolute inset-0 flex items-center justify-center text-center text-white bg-black/50">
-                  
-                  </div>
+              {error && !useEmbedPlayer ? (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50 p-4 text-center text-white">
+                  {error}
+                </div>
               ) : (
                 <>
                   {useEmbedPlayer && currentEpisodeData?.link_embed ? (

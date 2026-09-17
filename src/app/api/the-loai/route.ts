@@ -8,8 +8,9 @@ export async function GET() {
     console.log("[API] /api/the-loai status:", res.status)
     if (!res.ok) return NextResponse.json({ error: "Failed" }, { status: res.status })
     const data = await res.json()
-    // phimapi.com/v1/api/the-loai returns object with data.items
-    return NextResponse.json(Array.isArray(data) ? data : data?.data?.items ?? data?.items ?? [])
+    return NextResponse.json(
+      Array.isArray(data) ? data : data?.data?.items ?? data?.items ?? []
+    )
   } catch (e) {
     console.error("[API] /api/the-loai error:", e)
     return NextResponse.json({ error: "Proxy error" }, { status: 500 })
