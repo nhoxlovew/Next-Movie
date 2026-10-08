@@ -12,7 +12,7 @@ export default function LoginPage() {
                 <CatIcon className="size-10 text-green-400" />
             </div>
             <div className="pl-2">
-            Acme Inc.
+            Shinobi Village
             </div>
           </Link>
         </div>

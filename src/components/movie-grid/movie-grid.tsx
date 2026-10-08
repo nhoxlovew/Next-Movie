@@ -2,10 +2,11 @@
 
 import { Star, Clock, Heart } from "lucide-react"
 import Link from "next/link";
-import Image from "next/image"
+
 import { useEffect, useState } from "react";
 import { MovieGridSkeleton } from "./skeletons/movie-grid-skeleton";
 import { Movie } from "@/type/movie-details.types";
+import Image from "next/image";
 
 
 export function   MovieGrid() {
@@ -65,10 +66,7 @@ export function   MovieGrid() {
                   alt={movie.name}
                   priority={false}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-550"
-                  onError={(e) => {
-                    e.currentTarget.src = '/placeholder-movie.jpg'
-                  }}
-                  loading="lazy"
+                  loading="eager"
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/100 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />

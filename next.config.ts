@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'i.ex-cdn.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'phimimg.com',
         port: '',
         pathname: '/**',
@@ -30,5 +36,4 @@ const nextConfig: NextConfig = {
     ],
   },
 };
-
 export default nextConfig;
